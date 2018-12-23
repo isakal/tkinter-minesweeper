@@ -16,7 +16,7 @@ class GUI:
         root.config(menu=self.menu)
         self.submenu1 = Menu(self.menu)
         self.menu.add_cascade(label="cool kids",menu=self.submenu1)
-        self.submenu1.add_command(label="esketit",command=self.doNothing)
+        self.submenu1.add_command(label="esketit",command=self.esketit)
         self.submenu1.add_command(label="boi",command=self.boi)
         self.submenu1.add_separator()
         self.submenu1.add_command(label="Quit",command =quit)
@@ -27,7 +27,7 @@ class GUI:
 
     def printMessage(self):
         self.messageBox = messagebox.showinfo("","Hello!")
-    def doNothing(self):
+    def esketit(self):
         self.messageBox2 = messagebox.showinfo("","esketit")
     def boi(self):
         self.messageBox3 = messagebox.showinfo("","BOI")

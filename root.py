@@ -15,8 +15,8 @@ class GUI:
 
         self.menu = Menu(root, tearoff=0)
 
-        root.config(menu=self.menu)
-        self.submenu1 = Menu(self.menu)
+        master.config(menu=self.menu)
+        self.submenu1 = Menu(self.menu,tearoff=0)
         self.submenu2 = Menu(self.menu, tearoff=0)
 
         self.menu.add_cascade(label="cool kids", menu=self.submenu1)

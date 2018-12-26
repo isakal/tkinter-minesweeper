@@ -10,11 +10,7 @@ class GUI:
         frame1 = Frame(master)
         frame1.pack()
         root.title("Minesweeper")
-
-
-
-        self.printButton = Button(frame1, text="Print Message")
-        self.printButton.pack()
+        root.iconbitmap(r'mnswpr.ico')
 
         self.menu = Menu(root, tearoff=0)
         root.resizable(FALSE,FALSE)
@@ -54,13 +50,6 @@ class GUI:
         webbrowser.open("www.freeminesweeper.org/help/minehelpinstructions.html")
     def AboutInChrome(self):
         webbrowser.open("http://www.freeminesweeper.org/help/mineabout.html")
-
-
-
-
-
-
-
 
 root = Tk()
 root.geometry("300x400+700+300")

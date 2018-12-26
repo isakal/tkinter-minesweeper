@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
+import webbrowser
 
 
 
@@ -10,7 +11,7 @@ class GUI:
         root.title("Minesweeper")
 
 
-        self.printButton = Button(frame1, text="Print Message", command=self.printMessage)
+        self.printButton = Button(frame1, text="Print Message", command=self.PrintMessage)
         self.printButton.pack()
 
         self.menu = Menu(root, tearoff=0)
@@ -18,26 +19,42 @@ class GUI:
         master.config(menu=self.menu)
         self.submenu1 = Menu(self.menu,tearoff=0)
         self.submenu2 = Menu(self.menu, tearoff=0)
+        self.submenu3 = Menu(self.menu, tearoff=0)
 
-        self.menu.add_cascade(label="cool kids", menu=self.submenu1)
-        self.submenu1.add_command(label="esketit", command=self.esketit)
-        self.submenu1.add_command(label="boi", command=self.boi)
+        self.menu.add_cascade(label="Game", menu=self.submenu1)
+        self.submenu1.add_command(label="esketit", command=self.Esketit)
+        self.submenu1.add_command(label="boi", command=self.Boi)
         self.submenu1.add_separator()
-        self.submenu1.add_command(label="Quit", command=quit)
-        self.submenu2.add_command(label="gay", command=self.gay)
-        self.menu.add_cascade(label="gay", menu=self.submenu2)
+        self.submenu1.add_command(label="Quit", command=self.QuitPrompt)
 
-        self.quitButton = Button(frame1, text="Quit", command=root.quit)
+        self.menu.add_cascade(label="Options")
+
+        self.submenu3.add_command(label="Instructions",command=self.InstructionsInChrome)
+        self.submenu3.add_separator()
+        self.menu.add_cascade(label="Help", menu=self.submenu3)
+        self.submenu3.add_command(label="About", command=self.AboutInChrome)
+
+        self.quitButton = Button(frame1, text="Quit", command=self.QuitPrompt)
         self.quitButton.pack()
 
-    def printMessage(self):
+    def PrintMessage(self):
         self.messageBox = messagebox.showinfo("", "Hello!")
-    def esketit(self):
+    def Esketit(self):
         self.messageBox2 = messagebox.showinfo("", "esketit")
-    def boi(self):
+    def Boi(self):
         self.messageBox3 = messagebox.showinfo("", "BOI")
-    def gay(self):
-        self.messageBox4 = messagebox.showinfo("", "GAY")
+    def QuitPrompt(self):
+        self.quitPrompt = messagebox.askquestion("Quit", "Are You Sure you want to exit?", icon='warning')
+        if self.quitPrompt.lower() == "yes":
+            root.destroy()
+    def InstructionsInChrome(self):
+        webbrowser.open("www.freeminesweeper.org/help/minehelpinstructions.html")
+    def AboutInChrome(self):
+        webbrowser.open("http://www.freeminesweeper.org/help/mineabout.html")
+
+
+
+
 
 
 

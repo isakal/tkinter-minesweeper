@@ -61,5 +61,5 @@ class GUI:
 
 root = Tk()
 root.geometry("300x400+1000+300")
-mainwindow = GUI(root)
+minesweeper = GUI(root)
 root.mainloop()

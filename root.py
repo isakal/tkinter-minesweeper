@@ -12,7 +12,8 @@ class GUI:
         frame1.pack()
         root.title("Minesweeper")
         root.iconbitmap(r'mnswpr.ico')
-
+        master.configure(background="grey17")
+        
         self.menu = Menu(root, tearoff=0)
         root.resizable(FALSE,FALSE)
 

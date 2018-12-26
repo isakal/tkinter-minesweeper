@@ -4,6 +4,7 @@ import webbrowser
 
 
 
+
 class GUI:
     def __init__(self, master):
         frame1 = Frame(master)
@@ -11,23 +12,30 @@ class GUI:
         root.title("Minesweeper")
 
 
-        self.printButton = Button(frame1, text="Print Message", command=self.PrintMessage)
+
+        self.printButton = Button(frame1, text="Print Message")
         self.printButton.pack()
 
         self.menu = Menu(root, tearoff=0)
+        root.resizable(FALSE,FALSE)
 
         master.config(menu=self.menu)
         self.submenu1 = Menu(self.menu,tearoff=0)
         self.submenu2 = Menu(self.menu, tearoff=0)
         self.submenu3 = Menu(self.menu, tearoff=0)
 
-        self.menu.add_cascade(label="Game", menu=self.submenu1)
-        self.submenu1.add_command(label="esketit", command=self.Esketit)
-        self.submenu1.add_command(label="boi", command=self.Boi)
+        self.menu.add_cascade(label="Game", menu=self.submenu1)                 #add self.command to tkinter commands
+        self.submenu1.add_command(label="New Game")
         self.submenu1.add_separator()
-        self.submenu1.add_command(label="Quit", command=self.QuitPrompt)
+        self.submenu1.add_radiobutton(label="Beginner")
+        self.submenu1.add_radiobutton(label="Intermediate")
+        self.submenu1.add_radiobutton(label="Expert")
+        self.submenu1.add_separator()
+        self.submenu1.add_command(label="Quit",command=self.QuitPrompt)
 
-        self.menu.add_cascade(label="Options")
+        self.menu.add_cascade(label="Options", menu=self.submenu2)
+        self.submenu2.add_checkbutton(label="")
+
 
         self.submenu3.add_command(label="Instructions",command=self.InstructionsInChrome)
         self.submenu3.add_separator()
@@ -37,14 +45,9 @@ class GUI:
         self.quitButton = Button(frame1, text="Quit", command=self.QuitPrompt)
         self.quitButton.pack()
 
-    def PrintMessage(self):
-        self.messageBox = messagebox.showinfo("", "Hello!")
-    def Esketit(self):
-        self.messageBox2 = messagebox.showinfo("", "esketit")
-    def Boi(self):
-        self.messageBox3 = messagebox.showinfo("", "BOI")
+
     def QuitPrompt(self):
-        self.quitPrompt = messagebox.askquestion("Quit", "Are You Sure you want to exit?", icon='warning')
+        self.quitPrompt = messagebox.askquestion("Quit", "Are You Sure you want to exit?", icon="warning")
         if self.quitPrompt.lower() == "yes":
             root.destroy()
     def InstructionsInChrome(self):
@@ -60,6 +63,6 @@ class GUI:
 
 
 root = Tk()
-root.geometry("300x400+1000+300")
+root.geometry("300x400+700+300")
 minesweeper = GUI(root)
 root.mainloop()

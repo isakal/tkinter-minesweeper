@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 import webbrowser
+import buttons
 
 
 
@@ -37,9 +38,6 @@ class GUI:
         self.submenu3.add_separator()
         self.menu.add_cascade(label="Help", menu=self.submenu3)
         self.submenu3.add_command(label="About", command=self.AboutInChrome)
-
-        self.quitButton = Button(frame1, text="Quit", command=self.QuitPrompt)
-        self.quitButton.pack()
 
 
     def QuitPrompt(self):

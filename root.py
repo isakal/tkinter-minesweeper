@@ -14,31 +14,36 @@ class GUI:
         root.iconbitmap(r'mnswpr.ico')
         master.configure(background="grey17")
 
+
         self.menu = Menu(root, tearoff=0)
         root.resizable(FALSE,FALSE)
+        self.variable = IntVar()
 
         master.config(menu=self.menu)
         self.submenu1 = Menu(self.menu,tearoff=0)
         self.submenu2 = Menu(self.menu, tearoff=0)
         self.submenu3 = Menu(self.menu, tearoff=0)
 
-        self.menu.add_cascade(label="Game", menu=self.submenu1)                 #add self.command to tkinter commands
+        self.menu.add_cascade(label="Game", menu=self.submenu1)
         self.submenu1.add_command(label="New Game")
         self.submenu1.add_separator()
-        self.submenu1.add_radiobutton(label="Beginner")
-        self.submenu1.add_radiobutton(label="Intermediate")
-        self.submenu1.add_radiobutton(label="Expert")
+        self.submenu1.add_radiobutton(label="Beginner",value=1,variable=self.variable)
+        self.submenu1.add_radiobutton(label="Intermediate",value=2, variable=self.variable)
+        self.submenu1.add_radiobutton(label="Expert",value=3, variable=self.variable)
+        self.variable.set(1)
         self.submenu1.add_separator()
         self.submenu1.add_command(label="Quit",command=self.QuitPrompt)
 
         self.menu.add_cascade(label="Options", menu=self.submenu2)
-        self.submenu2.add_checkbutton(label="")
+        self.submenu2.add_checkbutton(label="Tutorial coming soon")
 
 
         self.submenu3.add_command(label="Instructions",command=self.InstructionsInChrome)
         self.submenu3.add_separator()
         self.menu.add_cascade(label="Help", menu=self.submenu3)
         self.submenu3.add_command(label="About", command=self.AboutInChrome)
+
+
 
 
     def QuitPrompt(self):
@@ -53,9 +58,11 @@ class GUI:
     if __name__ == '__main__':
         print("started game")
         mainloop()
+        print("finished game")
+
 
 
 root = Tk()
-root.geometry("300x400+700+300")
+root.geometry("300x300+800+400")
 minesweeper = GUI(root)
 

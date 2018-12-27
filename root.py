@@ -13,7 +13,7 @@ class GUI:
         root.title("Minesweeper")
         root.iconbitmap(r'mnswpr.ico')
         master.configure(background="grey17")
-        
+
         self.menu = Menu(root, tearoff=0)
         root.resizable(FALSE,FALSE)
 
@@ -46,11 +46,16 @@ class GUI:
         if self.quitPrompt.lower() == "yes":
             root.destroy()
     def InstructionsInChrome(self):
-        webbrowser.open("www.freeminesweeper.org/help/minehelpinstructions.html")
+        webbrowser.open('www.freeminesweeper.org/help/minehelpinstructions.html')
     def AboutInChrome(self):
-        webbrowser.open("http://www.freeminesweeper.org/help/mineabout.html")
+        webbrowser.open('http://www.freeminesweeper.org/help/mineabout.html')
+
+    if __name__ == '__main__':
+        print("started game")
+        mainloop()
+
 
 root = Tk()
 root.geometry("300x400+700+300")
 minesweeper = GUI(root)
-root.mainloop()
+

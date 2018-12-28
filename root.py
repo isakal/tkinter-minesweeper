@@ -1,22 +1,24 @@
 from tkinter import *
 from tkinter import messagebox
 import webbrowser
-import buttons
+from buttons import *
 
 
 class GUI:
     def __init__(self, master):
         self.master=master
-        frame1 = Frame(master)
+        global frame1
+        frame1 = Frame(master,background="grey17",width=300,height=300)
         frame1.pack()
-        root.title("Minesweeper")
-        root.iconbitmap(r'mnswpr.ico')
-        master.configure(background="grey17")
-        master.geometry("300x200")
+        master.title("Minesweeper")
+        master.iconbitmap(r'mnswpr.ico')
+        master.geometry("300x300")
+        master.resizable(FALSE,FALSE)
+        #-----
+        frame1.configure(background="red")
 
 
-        self.menu = Menu(root, tearoff=0)
-        root.resizable(FALSE,FALSE)
+        self.menu = Menu(master, tearoff=0)
         self.variable = IntVar()
 
         master.config(menu=self.menu)
@@ -44,9 +46,13 @@ class GUI:
         self.menu.add_cascade(label="Help", menu=self.submenu3)
         self.submenu3.add_command(label="About", command=self.AboutInChrome)
 
+        #------
+        b11.pack()
+        
+
     
     def difficulty1(self):
-        self.master.geometry("300x200")
+        self.master.geometry("300x300")
     
     def difficulty2(self):
         self.master.geometry("600x300")
@@ -57,7 +63,7 @@ class GUI:
     def QuitPrompt(self):
         self.quitPrompt = messagebox.askquestion("Quit", "Are You Sure you want to exit?", icon="warning")
         if self.quitPrompt.lower() == "yes":
-            root.destroy()
+            self.master.destroy()
     def InstructionsInChrome(self):
         webbrowser.open('www.freeminesweeper.org/help/minehelpinstructions.html')
     def AboutInChrome(self):

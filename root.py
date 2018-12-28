@@ -5,16 +5,17 @@ from buttons import *
 
 
 class GUI:
-	def __init__(self, master):
+	def __init__(self, master,):
 		self.master = master
 		global frame1
 		frame1 = Frame(master, background="grey17")
 		frame1.pack(fill='both', expand=True)
 		master.title("Minesweeper")
 		master.iconbitmap(r'mnswpr.ico')
-
-
 		master.resizable(FALSE, FALSE)
+
+
+
 
 		self.menu = Menu(master, tearoff=0)
 		self.variable = IntVar()
@@ -48,7 +49,6 @@ class GUI:
 
 
 
-
 	def difficulty1(self):
 		self.master.geometry("300x300")
 
@@ -74,6 +74,7 @@ class GUI:
 		print("started game")
 		mainloop()
 		print("finished game")
+
 
 
 root = Tk()

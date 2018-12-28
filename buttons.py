@@ -1,6 +1,10 @@
-import tkinter
 from tkinter import *
 import random
-import root
+from root import *
 
-b11=Button(root.frame1,text="a",height=3,width=3)
+for i in range(0,9):
+	for j in range(0,9):
+		b = Button(frame1, text="***")
+		b.grid(row=i,column=j)
+
+

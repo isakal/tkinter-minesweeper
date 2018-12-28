@@ -8,8 +8,8 @@ class GUI:
 	def __init__(self, master):
 		self.master = master
 		global frame1
-		self.frame1 = Frame(master, background="grey17")
-		self.frame1.pack(fill='both', expand=True)
+		frame1 = Frame(master, background="grey17")
+		frame1.pack(fill='both', expand=True)
 		master.title("Minesweeper")
 		master.iconbitmap(r'mnswpr.ico')
 
@@ -51,15 +51,13 @@ class GUI:
 
 	def difficulty1(self):
 		self.master.geometry("300x300")
-		self.frame1 = Frame(self.master, background="grey17", width=300, height=300)
 
 	def difficulty2(self):
 		self.master.geometry("600x300")
-		self.frame1 = Frame(self.master, background="grey17", width=600, height=300)
 
 	def difficulty3(self):
 		self.master.geometry("1000x800")
-		self.frame1 = Frame(self.master, background="grey17", width=1000, height=800)
+
 
 	def QuitPrompt(self):
 		self.quitPrompt = messagebox.askquestion("Quit", "Are You Sure you want to exit?", icon="warning")

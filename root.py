@@ -8,13 +8,13 @@ class GUI:
 	def __init__(self, master,):
 		self.master = master
 		global frame1
+		frame_pre = Frame(master, background="grey17")
+		frame_pre.pack(fill=X, ipady=20)
 		frame1 = Frame(master, background="grey17")
 		frame1.pack(fill='both', expand=True)
 		master.title("Minesweeper")
 		master.iconbitmap(r'mnswpr.ico')
 		master.resizable(FALSE, FALSE)
-
-
 
 
 		self.menu = Menu(master, tearoff=0)
@@ -46,11 +46,8 @@ class GUI:
 		self.submenu3.add_command(label="About", command=self.AboutInChrome)
 
 
-
-
-
 	def difficulty1(self):
-		self.master.geometry("300x300")
+		self.master.geometry("250x310")
 
 	def difficulty2(self):
 		self.master.geometry("600x300")

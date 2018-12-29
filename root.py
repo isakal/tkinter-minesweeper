@@ -44,12 +44,13 @@ class GUI:
 
 		self.variable.set(1)
 		difficulty1(master)
-
-	if __name__ == '__main__':
-		print("started game")
-		mainloop()
-		print("finished game")
+		master.geometry("250x310")
 
 
 root = Tk()
 minesweeper = GUI(root)
+
+if __name__ == '__main__':
+		print("started game")
+		mainloop()
+		print("finished game")

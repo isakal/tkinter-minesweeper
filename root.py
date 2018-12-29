@@ -26,9 +26,9 @@ class GUI:
 		self.menu.add_cascade(label="Game", menu=self.submenu1)
 		self.submenu1.add_command(label="New Game    F2")
 		self.submenu1.add_separator()
-		self.submenu1.add_radiobutton(label="Beginner", value=1, variable=self.variable, command=lambda:difficulty1(master))
-		self.submenu1.add_radiobutton(label="Intermediate", value=2, variable=self.variable, command=lambda:difficulty2(master))
-		self.submenu1.add_radiobutton(label="Expert", value=3, variable=self.variable, command=lambda:difficulty3(master))
+		self.submenu1.add_radiobutton(label="Beginner", value=1, variable=self.variable, command=lambda:difficulty1(master, buttonFrame))
+		self.submenu1.add_radiobutton(label="Intermediate", value=2, variable=self.variable, command=lambda:difficulty2(master, buttonFrame))
+		self.submenu1.add_radiobutton(label="Expert", value=3, variable=self.variable, command=lambda:difficulty3(master, buttonFrame))
 		self.submenu1.add_separator()
 		self.submenu1.add_command(label="Quit", command=lambda:QuitPrompt(master))
 
@@ -43,7 +43,7 @@ class GUI:
 		root.bind('<F2>', lambda e:master.destroy())
 
 		self.variable.set(1)
-		difficulty1(master)
+		difficulty1(master,buttonFrame)
 		master.geometry("250x310")
 
 

@@ -1,13 +1,12 @@
 from tkinter import *
-from tkinter import messagebox
-import webbrowser
 from buttons import *
+from functions import *
 
 
 class GUI:
-	def __init__(self, master,):
-		self.master = master
+	def __init__(self, master):
 		global buttonFrame
+		self.master = master
 		frame_pre = Frame(master, background="grey17")
 		frame_pre.pack(fill=X, ipady=20)
 		buttonFrame = Frame(master, background="grey17")
@@ -15,7 +14,6 @@ class GUI:
 		master.title("Minesweeper")
 		master.iconbitmap(r'mnswpr.ico')
 		master.resizable(FALSE, FALSE)
-
 
 		self.menu = Menu(master, tearoff=0)
 		self.variable = IntVar()
@@ -28,50 +26,29 @@ class GUI:
 		self.menu.add_cascade(label="Game", menu=self.submenu1)
 		self.submenu1.add_command(label="New Game    F2")
 		self.submenu1.add_separator()
-		self.submenu1.add_radiobutton(label="Beginner", value=1, variable=self.variable, command=self.difficulty1)
-		self.submenu1.add_radiobutton(label="Intermediate", value=2, variable=self.variable, command=self.difficulty2)
-		self.submenu1.add_radiobutton(label="Expert", value=3, variable=self.variable, command=self.difficulty3)
+		self.submenu1.add_radiobutton(label="Beginner", value=1, variable=self.variable, command=lambda:difficulty1(master))
+		self.submenu1.add_radiobutton(label="Intermediate", value=2, variable=self.variable, command=lambda:difficulty2(master))
+		self.submenu1.add_radiobutton(label="Expert", value=3, variable=self.variable, command=lambda:difficulty3(master))
 		self.submenu1.add_separator()
-		self.submenu1.add_command(label="Quit", command=self.QuitPrompt)
+		self.submenu1.add_command(label="Quit", command=lambda:QuitPrompt(master))
 
 		self.menu.add_cascade(label="Options", menu=self.submenu2)
 		self.submenu2.add_checkbutton(label="Tutorial coming soon")
 
-		self.submenu3.add_command(label="Instructions", command=self.InstructionsInChrome)
+		self.submenu3.add_command(label="Instructions", command=lambda:InstructionsInChrome(master))
 		self.submenu3.add_separator()
 		self.menu.add_cascade(label="Help", menu=self.submenu3)
-		self.submenu3.add_command(label="About", command=self.AboutInChrome)
+		self.submenu3.add_command(label="About", command=lambda:AboutInChrome(master))
+
+		root.bind('<F2>', lambda e:master.destroy())
 
 		self.variable.set(1)
-		self.difficulty1()
-
-
-	def difficulty1(self):
-		self.master.geometry("250x310")
-
-	def difficulty2(self):
-		self.master.geometry("600x300")
-
-	def difficulty3(self):
-		self.master.geometry("1000x800")
-
-
-	def QuitPrompt(self):
-		self.quitPrompt = messagebox.askquestion("Quit", "Are You Sure you want to exit?", icon="warning")
-		if self.quitPrompt.lower() == "yes":
-			self.master.destroy()
-
-	def InstructionsInChrome(self):
-		webbrowser.open('www.freeminesweeper.org/help/minehelpinstructions.html')
-
-	def AboutInChrome(self):
-		webbrowser.open('http://www.freeminesweeper.org/help/mineabout.html')
+		difficulty1(master)
 
 	if __name__ == '__main__':
 		print("started game")
 		mainloop()
 		print("finished game")
-
 
 
 root = Tk()

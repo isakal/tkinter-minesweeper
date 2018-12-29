@@ -7,11 +7,11 @@ from buttons import *
 class GUI:
 	def __init__(self, master,):
 		self.master = master
-		global frame1
+		global buttonFrame
 		frame_pre = Frame(master, background="grey17")
 		frame_pre.pack(fill=X, ipady=20)
-		frame1 = Frame(master, background="grey17")
-		frame1.pack(fill='both', expand=True)
+		buttonFrame = Frame(master, background="grey17")
+		buttonFrame.pack(fill='both', expand=True)
 		master.title("Minesweeper")
 		master.iconbitmap(r'mnswpr.ico')
 		master.resizable(FALSE, FALSE)
@@ -26,14 +26,11 @@ class GUI:
 		self.submenu3 = Menu(self.menu, tearoff=0)
 
 		self.menu.add_cascade(label="Game", menu=self.submenu1)
-		self.submenu1.add_command(label="New Game")
+		self.submenu1.add_command(label="New Game    F2")
 		self.submenu1.add_separator()
 		self.submenu1.add_radiobutton(label="Beginner", value=1, variable=self.variable, command=self.difficulty1)
 		self.submenu1.add_radiobutton(label="Intermediate", value=2, variable=self.variable, command=self.difficulty2)
 		self.submenu1.add_radiobutton(label="Expert", value=3, variable=self.variable, command=self.difficulty3)
-		self.variable.set(1)
-		self.difficulty1()
-
 		self.submenu1.add_separator()
 		self.submenu1.add_command(label="Quit", command=self.QuitPrompt)
 
@@ -44,6 +41,9 @@ class GUI:
 		self.submenu3.add_separator()
 		self.menu.add_cascade(label="Help", menu=self.submenu3)
 		self.submenu3.add_command(label="About", command=self.AboutInChrome)
+
+		self.variable.set(1)
+		self.difficulty1()
 
 
 	def difficulty1(self):

@@ -54,3 +54,4 @@ if __name__ == '__main__':
 		print("started game")
 		mainloop()
 		print("finished game")
+#TODO: add if __name__ == '__main__': in an seperate file

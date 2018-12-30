@@ -1,4 +1,5 @@
 from tkinter import *
+mine= PhotoImage(file="mnswpr.ico")
 
 
 def buttonsDiff1(frame):
@@ -18,6 +19,6 @@ def buttonsDiff2(frame):
 def buttonsDiff3(frame):
 	for row in range(0,20):
 		for column in range(0,15):
-			b = Button(frame)
+			button = Button(frame)
 			buttonSize=25
-			b.place(height=buttonSize,width=buttonSize,x=row*buttonSize,y=column*buttonSize)
+			button.place(height=buttonSize,width=buttonSize,x=row*buttonSize,y=column*buttonSize)

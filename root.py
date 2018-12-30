@@ -24,7 +24,7 @@ class GUI:
 		self.submenu3 = Menu(self.menu, tearoff=0)
 
 		self.menu.add_cascade(label="Game", menu=self.submenu1)
-		self.submenu1.add_command(label="New Game    F2")
+		self.submenu1.add_command(label="New Game    F2",command=quit)
 		self.submenu1.add_separator()
 		self.submenu1.add_radiobutton(label="Beginner", value=1, variable=self.variable,
 									  command=lambda: difficulty1(master, buttonFrame))

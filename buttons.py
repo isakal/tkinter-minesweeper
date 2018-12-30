@@ -1,24 +1,28 @@
 from tkinter import *
-mine= PhotoImage(file="mnswpr.ico")
+buttonSize=25
+buttonsDict={}
 
 
 def buttonsDiff1(frame):
+	buttonsDict.clear()
 	for row in range(0,10):
 		for column in range(0,10):
-			b = Button(frame)
-			buttonSize=25
-			b.place(height=buttonSize,width=buttonSize,x=row*buttonSize,y=column*buttonSize)
+			gridButton = Button(frame)
+			buttonsDict["field{}{}".format(row,column)]=gridButton
+			buttonsDict["field{}{}".format(row,column)].place(height=buttonSize,width=buttonSize,x=row*buttonSize,y=column*buttonSize)
 
 def buttonsDiff2(frame):
+	buttonsDict.clear()
 	for row in range(0,15):
 		for column in range(0,10):
-			b = Button(frame)
-			buttonSize=25
-			b.place(height=buttonSize,width=buttonSize,x=row*buttonSize,y=column*buttonSize)
+			gridButton = Button(frame)
+			buttonsDict["field{}{}".format(row,column)]=gridButton
+			buttonsDict["field{}{}".format(row,column)].place(height=buttonSize,width=buttonSize,x=row*buttonSize,y=column*buttonSize)
 
 def buttonsDiff3(frame):
+	buttonsDict.clear()
 	for row in range(0,20):
 		for column in range(0,15):
-			button = Button(frame)
-			buttonSize=25
-			button.place(height=buttonSize,width=buttonSize,x=row*buttonSize,y=column*buttonSize)
+			gridButton = Button(frame)
+			buttonsDict["field{}{}".format(row,column)]=gridButton
+			buttonsDict["field{}{}".format(row,column)].place(height=buttonSize,width=buttonSize,x=row*buttonSize,y=column*buttonSize)

@@ -55,6 +55,6 @@ minesweeper = GUI(root)
 
 if __name__ == '__main__':
 	print("started game")
-	mainloop();print(buttonsDict)
+	mainloop()
 	print("finished game")
 # TODO: add if __name__ == '__main__': in an seperate file

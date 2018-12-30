@@ -12,9 +12,10 @@ def defaultDiff(window, frame):
 	rows=int(config.get("Buttons","defaultRows"))
 	columns=int(config.get("Buttons","defaultColumns"))
 	resx=buttonSize*columns
-	resy=buttonSize*rows+buttonSize+20
+	resy=buttonSize*rows+buttonSize+40
 	window.geometry("{}x{}".format(resx,resy))
 	buttonsDiff1(frame, rows, columns)
+
 
 def difficulty1(window, frame):
 	rows=10

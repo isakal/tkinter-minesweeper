@@ -38,7 +38,7 @@ class GUI:
 		self.menu.add_cascade(label="Options", menu=self.submenu2)
 		self.submenu2.add_checkbutton(label="Tutorial coming soon")
 
-		self.submenu3.add_command(label="Instructions", command=lambda: InstructionsInChrome(master))
+		self.submenu3.add_command(label="Instructions", command=lambda: InstructionsInChrome())
 		self.submenu3.add_separator()
 		self.menu.add_cascade(label="Help", menu=self.submenu3)
 		self.submenu3.add_command(label="About", command=lambda: AboutInChrome())

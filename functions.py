@@ -56,6 +56,6 @@ def InstructionsInChrome():
 
 
 def AboutInChrome():
-	webbrowser.open('http://www.freeminesweeper.org/help/mineabout.html')
+	webbrowser.open('www.freeminesweeper.org/help/mineabout.html')
 
 # TODO: add more space above buttons for timer flag check

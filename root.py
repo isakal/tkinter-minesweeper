@@ -41,7 +41,7 @@ class GUI:
 		self.submenu3.add_command(label="Instructions", command=lambda: InstructionsInChrome(master))
 		self.submenu3.add_separator()
 		self.menu.add_cascade(label="Help", menu=self.submenu3)
-		self.submenu3.add_command(label="About", command=lambda: AboutInChrome(master))
+		self.submenu3.add_command(label="About", command=lambda: AboutInChrome())
 
 		root.bind('<F2>', lambda e: master.destroy())
 

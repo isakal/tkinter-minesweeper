@@ -3,13 +3,14 @@ buttonSize=25
 buttonsDict={}
 
 
-def buttonsDiff1(frame):
+def buttonsDiff1(frame, rows, columns):
 	buttonsDict.clear()
-	for row in range(0,10):
-		for column in range(0,10):
+	print(rows,columns)
+	for row in range(0,rows):
+		for column in range(0,columns):
 			gridButton = Button(frame,command=lambda row=row,column=column: sink(row,column))
 			buttonsDict[(row, column)] =gridButton
-			buttonsDict[(row, column)] .place(height=buttonSize,width=buttonSize,x=row*buttonSize,y=column*buttonSize)
+			buttonsDict[(row, column)] .place(height=buttonSize,width=buttonSize,x=column*buttonSize,y=row*buttonSize)
 			
 
 def buttonsDiff2(frame):

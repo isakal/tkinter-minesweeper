@@ -47,7 +47,7 @@ class GUI:
 
 		self.variable.set(1)
 		difficulty1(master, buttonFrame)
-		master.geometry("250x310")
+		fixGeometry()
 
 
 root = Tk()

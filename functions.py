@@ -5,18 +5,39 @@ from buttons import *
 
 
 def difficulty1(window, frame):
-	window.geometry("250x290")
-	buttonsDiff1(frame)
+	rows=10
+	columns=10
+	resx=25*columns
+	resy=25*rows+40
+	window.geometry("{}x{}".format(resx,resy))
+	buttonsDiff1(frame, rows, columns)
 
 
 def difficulty2(window, frame):
-	window.geometry("375x290")
-	buttonsDiff2(frame)
+	rows=10
+	columns=15
+	resx=25*columns
+	resy=25*rows+40
+	window.geometry("{}x{}".format(resx,resy))
+	#window.geometry("375x290")
+	buttonsDiff1(frame, rows, columns)
 
 
 def difficulty3(window, frame):
-	window.geometry("500x415")
-	buttonsDiff3(frame)
+	rows=15
+	columns=20
+	resx=25*columns
+	resy=25*rows+40
+	window.geometry("{}x{}".format(resx,resy))
+	#window.geometry("500x415")
+	buttonsDiff1(frame, rows, columns)
+
+
+def fixGeometry():
+	rows=10
+	columns=10
+	resx=25*columns
+	resy=25*rows+40+20
 
 
 def QuitPrompt(window):

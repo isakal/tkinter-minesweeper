@@ -1,0 +1,4 @@
+[Buttons]
+buttonSize=25
+defaultRows=10
+defaultColumns=10

@@ -2,13 +2,25 @@ from tkinter import *
 from tkinter import messagebox
 import webbrowser
 from buttons import *
+from configparser import *
 
+config=ConfigParser()
+config.readfp(open(r"config.txt"))
+buttonSize=int(config.get("Buttons","buttonSize"))
+
+def defaultDiff(window, frame):
+	rows=int(config.get("Buttons","defaultRows"))
+	columns=int(config.get("Buttons","defaultColumns"))
+	resx=buttonSize*columns
+	resy=buttonSize*rows+buttonSize+20
+	window.geometry("{}x{}".format(resx,resy))
+	buttonsDiff1(frame, rows, columns)
 
 def difficulty1(window, frame):
 	rows=10
 	columns=10
-	resx=25*columns
-	resy=25*rows+40
+	resx=buttonSize*columns
+	resy=buttonSize*rows+40
 	window.geometry("{}x{}".format(resx,resy))
 	buttonsDiff1(frame, rows, columns)
 
@@ -16,28 +28,19 @@ def difficulty1(window, frame):
 def difficulty2(window, frame):
 	rows=10
 	columns=15
-	resx=25*columns
-	resy=25*rows+40
+	resx=buttonSize*columns
+	resy=buttonSize*rows+40
 	window.geometry("{}x{}".format(resx,resy))
-	#window.geometry("375x290")
 	buttonsDiff1(frame, rows, columns)
 
 
 def difficulty3(window, frame):
 	rows=15
 	columns=20
-	resx=25*columns
-	resy=25*rows+40
+	resx=buttonSize*columns
+	resy=buttonSize*rows+40
 	window.geometry("{}x{}".format(resx,resy))
-	#window.geometry("500x415")
 	buttonsDiff1(frame, rows, columns)
-
-
-def fixGeometry():
-	rows=10
-	columns=10
-	resx=25*columns
-	resy=25*rows+40+20
 
 
 def QuitPrompt(window):

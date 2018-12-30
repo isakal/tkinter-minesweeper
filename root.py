@@ -46,8 +46,7 @@ class GUI:
 		root.bind('<F2>', lambda e: master.destroy())
 
 		self.variable.set(1)
-		difficulty1(master, buttonFrame)
-		fixGeometry()
+		defaultDiff(master, buttonFrame)
 
 
 root = Tk()

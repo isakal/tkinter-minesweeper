@@ -21,6 +21,10 @@ class GUI:
 		self.menu = Menu(master, tearoff=0)
 		diff = IntVar()
 		master.config(menu=self.menu)
+
+		test=PhotoImage(file="flag.gif")
+		btn=Label(framePre,image=test)
+		btn.pack()
 		
 		self.submenu1 = Menu(self.menu, tearoff=0)
 		self.submenu2 = Menu(self.menu, tearoff=0)

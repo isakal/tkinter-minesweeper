@@ -39,4 +39,4 @@ def buttonsDiff3(frame):
 
 
 def sink(row, column):
-	buttonsDict[(row, column)].config(relief=SUNKEN, bg="white")
+	buttonsDict[(row, column)].config(relief=SUNKEN, bg="white",state=DISABLED)

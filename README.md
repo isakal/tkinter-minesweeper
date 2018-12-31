@@ -1,2 +1,2 @@
-# tkinter-project
-Repository using python 3.7 tkinter library
+# Minesweeper
+Minesweeper game using python 3.7 

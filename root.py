@@ -1,24 +1,26 @@
 from tkinter import *
 from buttons import *
 from functions import *
+from configparser import *
+
+config = ConfigParser()
+config.readfp(open(r"config.txt"))
+buttonFramePadding = int(config.get("Buttons","framePreHeight"))
 
 
 class GUI:
 	def __init__(self, master):
 		global buttonFrame
 		self.master = master
-		frame_pre = Frame(master, background="grey17")
-		frame_pre.pack(fill=X, ipady=20)
+		framePre = Frame(master, background="grey17")
+		framePre.pack(fill=X, ipady=buttonFramePadding/2)
 		buttonFrame = Frame(master, background="grey17")
 		buttonFrame.pack(fill='both', expand=True)
-		master.title("Minesweeper")
-		master.iconbitmap(r'mnswpr.ico')
-		master.resizable(FALSE, FALSE)
 
 		self.menu = Menu(master, tearoff=0)
 		self.variable = IntVar()
-
 		master.config(menu=self.menu)
+		
 		self.submenu1 = Menu(self.menu, tearoff=0)
 		self.submenu2 = Menu(self.menu, tearoff=0)
 		self.submenu3 = Menu(self.menu, tearoff=0)
@@ -42,15 +44,19 @@ class GUI:
 		self.submenu3.add_separator()
 		self.menu.add_cascade(label="Help", menu=self.submenu3)
 		self.submenu3.add_command(label="About", command=lambda: AboutInChrome())
-
-		root.bind('<F2>', lambda e: master.destroy())
-
 		self.variable.set(1)
 		defaultDiff(master, buttonFrame)
 
 
+
+class binds:
+	def __init__(self,master):
+		root.bind('<F2>', lambda e: master.destroy())
+
 root = Tk()
+settings = settings(root)
 minesweeper = GUI(root)
+binds = binds(root)
 
 if __name__ == '__main__':
 	print("started game")

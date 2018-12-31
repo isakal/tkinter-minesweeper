@@ -5,6 +5,9 @@ config = ConfigParser()
 config.read_file(open(r"config.txt"))
 buttonSize = int(config.get("Buttons", "buttonSize"))
 buttonsDict = {}
+flagged=[]
+sunken=[]
+
 
 
 def buttonsDiff1(frame, rows, columns):
@@ -22,7 +25,11 @@ def buttonsDiff1(frame, rows, columns):
 
 def sink(row, column):
 	buttonsDict[(row, column)].config(relief=SUNKEN, bg="white", state=DISABLED)
+	sunken.append(buttonsDict[(row, column)])
+	print(sunken)
 
 
 def flag(row, column):
-	buttonsDict[(row, column)].config(bg="red")
+	if buttonsDict[(row, column)] not in sunken:
+		buttonsDict[(row, column)].config(bg="red")
+		flagged.append(buttonsDict[(row, column)])

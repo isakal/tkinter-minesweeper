@@ -10,13 +10,6 @@ buttonSize = int(config.get("Buttons", "buttonSize"))
 buttonFramePadding = int(config.get("Buttons","framePreHeight"))
 
 
-class settings:
-	def __init__(self,master):
-		master.title("Minesweeper")
-		master.iconbitmap(r'mnswpr.ico')
-		master.resizable(FALSE, FALSE)
-
-
 def defaultDiff(window, frame):
 	rows = int(config.get("Buttons", "defaultRows"))
 	columns = int(config.get("Buttons", "defaultColumns"))
@@ -51,6 +44,16 @@ def difficulty3(window, frame):
 	resy = buttonSize * rows + buttonFramePadding
 	window.geometry(f"{resx}x{resy}")
 	buttonsDiff1(frame, rows, columns)
+
+
+def newGame(difficulty, window, frame):
+	print(difficulty)   #Debugging purposes
+	if difficulty==1:
+		difficulty1(window, frame)
+	elif difficulty==2:
+		difficulty2(window, frame)
+	elif difficulty==3:
+		difficulty3(window, frame)
 
 
 def QuitPrompt(window):

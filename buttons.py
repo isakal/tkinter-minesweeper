@@ -29,8 +29,8 @@ def sink(row, column):
 def flag(row, column):
 	if buttonsDict[(row, column)] not in sunken:
 		if buttonsDict[(row, column)] not in flagged:
-			buttonsDict[(row, column)].config(bg="red")
+			buttonsDict[(row, column)].config(bg="red",state=DISABLED)
 			flagged.append(buttonsDict[(row, column)])
 		else:
-			buttonsDict[(row, column)].config(bg="grey75")
+			buttonsDict[(row, column)].config(bg="grey75",state=NORMAL)
 			flagged.remove(buttonsDict[(row, column)])

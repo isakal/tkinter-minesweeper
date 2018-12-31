@@ -2,4 +2,4 @@
 buttonSize=25
 defaultRows=10
 defaultColumns=10
-framePreHeight=80
+framePreHeight=40

@@ -17,7 +17,7 @@ def buttonsDiff1(frame, rows, columns):
 			buttonsDict[(row, column)].place(height=buttonSize, width=buttonSize, x=column * buttonSize,
 											 y=row * buttonSize)
 			buttonsDict[(row, column)].bind('<Button-3>',
-											lambda row=row, column=column: flag(row, column))
+											lambda event, row=row, column=column: flag(row, column))
 
 
 def sink(row, column):

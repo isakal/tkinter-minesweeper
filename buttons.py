@@ -2,7 +2,7 @@ from tkinter import *
 from configparser import *
 
 config = ConfigParser()
-config.readfp(open(r"config.txt"))
+config.read_file(open(r"config.txt"))
 buttonSize = int(config.get("Buttons", "buttonSize"))
 buttonsDict = {}
 

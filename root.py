@@ -4,7 +4,7 @@ from functions import *
 from configparser import *
 
 config = ConfigParser()
-config.readfp(open(r"config.txt"))
+config.read_file(open(r"config.txt"))
 buttonFramePadding = int(config.get("Buttons","framePreHeight"))
 
 

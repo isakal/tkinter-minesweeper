@@ -81,3 +81,27 @@ def InstructionsInChrome():
 
 def AboutInChrome():
 	webbrowser.open('www.freeminesweeper.org/help/mineabout.html')
+
+def Credits(frame, difficulty):
+	if difficulty==1:
+		for row in range(0, int(config.get("Buttons", "diff1Rows"))):
+			for column in range(0, int(config.get("Buttons", "diff1Columns"))):
+				buttonsDict[(row, column)].place_forget()
+	if difficulty==2:
+		for row in range(0, int(config.get("Buttons", "diff2Rows"))):
+			for column in range(0, int(config.get("Buttons", "diff2Columns"))):
+				buttonsDict[(row, column)].place_forget()
+	if difficulty==3:
+		for row in range(0, int(config.get("Buttons", "diff3Rows"))):
+			for column in range(0, int(config.get("Buttons", "diff3Columns"))):
+				buttonsDict[(row, column)].place_forget()
+	creditsLabel1=Label(frame, background="grey80", text="Minesweeper {}".format(str(config.get("Buttons","version"))))
+	creditsLabel1.place(x=0,y=0)
+	creditsLabel2=Label(frame, background="grey80", text="")
+	creditsLabel2.place(x=0,y=20)
+	creditsLabel3=Label(frame, background="grey80", text="Contributors:")
+	creditsLabel3.place(x=0,y=40)
+	creditsLabel4=Label(frame, background="grey80", text="Ivan Sakal aka Saki")
+	creditsLabel4.place(x=0,y=60)
+	creditsLabel5=Label(frame, background="grey80", text="Davor Najev aka Spinzed")
+	creditsLabel5.place(x=0,y=80)

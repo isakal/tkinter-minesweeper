@@ -9,3 +9,4 @@ diff2Rows=10
 diff2Columns=15
 diff3Rows=15
 diff3Columns=20
+version=preAlpha

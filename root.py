@@ -13,7 +13,7 @@ class GUI:
 		self.master = master
 		framePre = Frame(master, background="grey17")
 		framePre.pack(fill=X, ipady=buttonFramePadding/2)
-		buttonFrame = Frame(master, background="grey17")
+		buttonFrame = Frame(master, background="grey80")
 		buttonFrame.pack(fill='both', expand=True)
 		defaultDiff(master, buttonFrame)
 		resx=getx()
@@ -44,10 +44,12 @@ class GUI:
 		self.menu.add_cascade(label="Options", menu=self.submenu2)
 		self.submenu2.add_checkbutton(label="Tutorial coming soon")
 
+		self.menu.add_cascade(label="Help", menu=self.submenu3)
 		self.submenu3.add_command(label="Instructions", command=lambda: InstructionsInChrome())
 		self.submenu3.add_separator()
-		self.menu.add_cascade(label="Help", menu=self.submenu3)
 		self.submenu3.add_command(label="About", command=lambda: AboutInChrome())
+		self.submenu3.add_separator()
+		self.submenu3.add_command(label="Credits", command=lambda: Credits(buttonFrame,diff.get()))
 
 
 class settings:

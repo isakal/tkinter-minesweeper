@@ -47,7 +47,6 @@ def difficulty3(window, frame):
 
 
 def newGame(difficulty, window, frame):
-	print(difficulty)   #Debugging purposes
 	if difficulty==1:
 		difficulty1(window, frame)
 	elif difficulty==2:

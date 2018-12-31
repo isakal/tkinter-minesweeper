@@ -9,10 +9,8 @@ flagged=[]
 sunken=[]
 
 
-
 def buttonsDiff1(frame, rows, columns):
 	buttonsDict.clear()
-	print(rows, columns)
 	for row in range(0, rows):
 		for column in range(0, columns):
 			gridButton = Button(frame, bg="grey75", command=lambda row=row, column=column: sink(row, column))
@@ -26,10 +24,13 @@ def buttonsDiff1(frame, rows, columns):
 def sink(row, column):
 	buttonsDict[(row, column)].config(relief=SUNKEN, bg="white", state=DISABLED)
 	sunken.append(buttonsDict[(row, column)])
-	print(sunken)
 
 
 def flag(row, column):
 	if buttonsDict[(row, column)] not in sunken:
-		buttonsDict[(row, column)].config(bg="red")
-		flagged.append(buttonsDict[(row, column)])
+		if buttonsDict[(row, column)] not in flagged:
+			buttonsDict[(row, column)].config(bg="red")
+			flagged.append(buttonsDict[(row, column)])
+		else:
+			buttonsDict[(row, column)].config(bg="grey75")
+			flagged.remove(buttonsDict[(row, column)])

@@ -5,8 +5,8 @@ config = ConfigParser()
 config.read_file(open(r"config.txt"))
 buttonSize = int(config.get("Buttons", "buttonSize"))
 buttonsDict = {}
-flagged=[]
-sunken=[]
+flagged = []
+sunken = []
 
 
 def buttonsDiff1(frame, rows, columns):
@@ -29,11 +29,11 @@ def sink(row, column):
 def flag(row, column):
 	if buttonsDict[(row, column)] not in sunken:
 		if buttonsDict[(row, column)] not in flagged:
-			flag=PhotoImage(file="flag.gif")
-			buttonsDict[(row, column)].config(image=flag,state=DISABLED)
-			buttonsDict[(row, column)].image=flag	
+			flag = PhotoImage(file="flag.gif")
+			buttonsDict[(row, column)].config(image=flag, state=DISABLED)
+			buttonsDict[(row, column)].image = flag
 			flagged.append(buttonsDict[(row, column)])
 
 		else:
-			buttonsDict[(row, column)].config(image="",state=NORMAL)
+			buttonsDict[(row, column)].config(image="", state=NORMAL)
 			flagged.remove(buttonsDict[(row, column)])

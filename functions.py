@@ -26,16 +26,10 @@ def defaultDiff(window, frame):
 
 def getx():
 	return resx
-
-
 def gety():
 	return resy
 def getFrame():
 	return buttonFrame
-
-
-def retryPlace(button):
-	button.place(height=25, width=35, x=(resx - 35) / 2, y=((buttonFramePadding / 2) - 25) / 2 + 20)
 
 
 def difficulty1(window, frame):

@@ -4,12 +4,12 @@ import webbrowser
 from buttons import *
 from configparser import *
 from time import *
+from random import *
 
 config = ConfigParser()
 config.read_file(open(r"config.txt"))
 buttonSize = int(config.get("Buttons", "buttonSize"))
 buttonFramePadding = int(config.get("Buttons", "framePreHeight"))
-
 
 
 def defaultDiff(window, frame):
@@ -21,7 +21,7 @@ def defaultDiff(window, frame):
 	resx = buttonSize * columns
 	resy = buttonSize * rows + buttonFramePadding + 20
 	window.geometry(f"{resx}x{resy}")
-	buttonsDiff1(frame, rows, columns)
+	gridCreate(frame, rows, columns)
 
 
 def getx():
@@ -39,7 +39,7 @@ def difficulty1(window, frame):
 	resx = buttonSize * columns
 	resy = buttonSize * rows + buttonFramePadding
 	window.geometry(f"{resx}x{resy}")
-	buttonsDiff1(frame, rows, columns)
+	gridCreate(frame, rows, columns)
 
 
 def difficulty2(window, frame):
@@ -51,7 +51,7 @@ def difficulty2(window, frame):
 	resx = buttonSize * columns
 	resy = buttonSize * rows + buttonFramePadding
 	window.geometry(f"{resx}x{resy}")
-	buttonsDiff1(frame, rows, columns)
+	gridCreate(frame, rows, columns)
 
 
 def difficulty3(window, frame):
@@ -63,16 +63,48 @@ def difficulty3(window, frame):
 	resx = buttonSize * columns
 	resy = buttonSize * rows + buttonFramePadding
 	window.geometry(f"{resx}x{resy}")
-	buttonsDiff1(frame, rows, columns)
+	gridCreate(frame, rows, columns)
 
 
 def newGame(difficulty, window, frame):
 	if difficulty == 1:
+		maxbombs=10
 		difficulty1(window, frame)
+		for i in range(0, maxbombs):
+			randomRow=randint(0,int(config.get("Buttons", "diff1Rows"))-1)
+			randomColumn=randint(0,int(config.get("Buttons", "diff1Columns"))-1)
+			print (randomRow,randomColumn)
+			while buttonsDict[(randomRow, randomColumn)] in bomb:
+				randomRow=randint(0,int(config.get("Buttons", "diff1Rows"))-1)
+				randomColumn=randint(0,int(config.get("Buttons", "diff1Columns"))-1)
+			bomb.append(buttonsDict[(randomRow, randomColumn)])
+		giveButtonsFunction(frame,int(config.get("Buttons", "diff1Rows")),int(config.get("Buttons", "diff1Columns")))
+
 	elif difficulty == 2:
+		maxbombs=17
 		difficulty2(window, frame)
+		for i in range(0, maxbombs):
+			randomRow=randint(0,int(config.get("Buttons", "diff1Rows"))-1)
+			randomColumn=randint(0,int(config.get("Buttons", "diff1Columns"))-1)
+			print (randomRow,randomColumn)
+			while buttonsDict[(randomRow, randomColumn)] in bomb:
+				randomRow=randint(0,int(config.get("Buttons", "diff1Rows"))-1)
+				randomColumn=randint(0,int(config.get("Buttons", "diff1Columns"))-1)
+			bomb.append(buttonsDict[(randomRow, randomColumn)])
+		giveButtonsFunction(frame,int(config.get("Buttons", "diff2Rows")),int(config.get("Buttons", "diff2Columns")))
+
 	elif difficulty == 3:
+		maxbombs=27
 		difficulty3(window, frame)
+		for i in range(0, maxbombs):
+			randomRow=randint(0,int(config.get("Buttons", "diff1Rows"))-1)
+			randomColumn=randint(0,int(config.get("Buttons", "diff1Columns"))-1)
+			print (randomRow,randomColumn)
+			while buttonsDict[(randomRow, randomColumn)] in bomb:
+				randomRow=randint(0,int(config.get("Buttons", "diff1Rows"))-1)
+				randomColumn=randint(0,int(config.get("Buttons", "diff1Columns"))-1)
+			bomb.append(buttonsDict[(randomRow, randomColumn)])
+		giveButtonsFunction(frame,int(config.get("Buttons", "diff3Rows")),int(config.get("Buttons", "diff3Columns")))
 
 
 def QuitPrompt(window):

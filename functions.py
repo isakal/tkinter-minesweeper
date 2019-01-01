@@ -20,7 +20,7 @@ def defaultDiff(window, frame):
 	resx = buttonSize * columns
 	resy = buttonSize * rows + buttonFramePadding + 20
 	window.geometry(f"{resx}x{resy}")
-	gridCreate(frame, rows, columns)
+	gridCreate(frame, rows, columns, False)
 
 
 def getx():
@@ -31,7 +31,7 @@ def gety():
 	return resy
 
 
-def difficulty1(window, frame):
+def difficulty1(window, frame, isGameStarted):
 	global resx
 	global resy
 
@@ -40,10 +40,10 @@ def difficulty1(window, frame):
 	resx = buttonSize * columns
 	resy = buttonSize * rows + buttonFramePadding
 	window.geometry(f"{resx}x{resy}")
-	gridCreate(frame, rows, columns)
+	gridCreate(frame, rows, columns, isGameStarted)
 
 
-def difficulty2(window, frame):
+def difficulty2(window, frame, isGameStarted):
 	global resx
 	global resy
 
@@ -52,10 +52,10 @@ def difficulty2(window, frame):
 	resx = buttonSize * columns
 	resy = buttonSize * rows + buttonFramePadding
 	window.geometry(f"{resx}x{resy}")
-	gridCreate(frame, rows, columns)
+	gridCreate(frame, rows, columns, isGameStarted)
 
 
-def difficulty3(window, frame):
+def difficulty3(window, frame, isGameStarted):
 	global resx
 	global resy
 
@@ -64,7 +64,7 @@ def difficulty3(window, frame):
 	resx = buttonSize * columns
 	resy = buttonSize * rows + buttonFramePadding
 	window.geometry(f"{resx}x{resy}")
-	gridCreate(frame, rows, columns)
+	gridCreate(frame, rows, columns, isGameStarted)
 
 
 def newGame(difficulty, window, frame):
@@ -72,7 +72,7 @@ def newGame(difficulty, window, frame):
 	gameStarted = True
 	if difficulty == 1:
 		maxbombs = 10
-		difficulty1(window, frame)
+		difficulty1(window, frame, gameStarted)
 		for i in range(0, maxbombs):
 			randomRow = randint(0, int(config.get("Buttons", "diff1Rows")) - 1)
 			randomColumn = randint(0, int(config.get("Buttons", "diff1Columns")) - 1)
@@ -85,7 +85,7 @@ def newGame(difficulty, window, frame):
 
 	elif difficulty == 2:
 		maxbombs = 17
-		difficulty2(window, frame)
+		difficulty2(window, frame, gameStarted)
 		for i in range(0, maxbombs):
 			randomRow = randint(0, int(config.get("Buttons", "diff1Rows")) - 1)
 			randomColumn = randint(0, int(config.get("Buttons", "diff1Columns")) - 1)
@@ -98,7 +98,7 @@ def newGame(difficulty, window, frame):
 
 	elif difficulty == 3:
 		maxbombs = 27
-		difficulty3(window, frame)
+		difficulty3(window, frame, gameStarted)
 		for i in range(0, maxbombs):
 			randomRow = randint(0, int(config.get("Buttons", "diff1Rows")) - 1)
 			randomColumn = randint(0, int(config.get("Buttons", "diff1Columns")) - 1)

@@ -11,7 +11,7 @@ bomb = []
 gameStarted = False
 
 
-def gridCreate(frame, rows, columns):
+def gridCreate(frame, rows, columns, isGameStarted):
 	buttonsDict.clear()
 	for row in range(0, rows):
 		for column in range(0, columns):
@@ -20,7 +20,7 @@ def gridCreate(frame, rows, columns):
 			buttonsDict[(row, column)].place(height=buttonSize, width=buttonSize, x=column * buttonSize,
 											 y=row * buttonSize)
 			buttonsDict[(row, column)].bind('<Button-3>',
-											lambda event, row=row, column=column: flag(row, column))
+											lambda event, row=row, column=column: flag(row, column, isGameStarted))
 
 
 def giveButtonsFunction(frame, rows, columns):
@@ -39,14 +39,15 @@ def sink(row, column):
 		buttonsDict[(row, column)].image = bombImage
 
 
-def flag(row, column):
-	if buttonsDict[(row, column)] not in sunken:
-		if buttonsDict[(row, column)] not in flagged:
-			flagImage = PhotoImage(file="flag.gif")
-			buttonsDict[(row, column)].config(image=flagImage, state=DISABLED)
-			buttonsDict[(row, column)].image = flagImage
-			flagged.append(buttonsDict[(row, column)])
+def flag(row, column, isGameStarted):
+	if isGameStarted:
+		if buttonsDict[(row, column)] not in sunken:
+			if buttonsDict[(row, column)] not in flagged:
+				flagImage = PhotoImage(file="flag.gif")
+				buttonsDict[(row, column)].config(image=flagImage, state=DISABLED)
+				buttonsDict[(row, column)].image = flagImage
+				flagged.append(buttonsDict[(row, column)])
 
-		else:
-			buttonsDict[(row, column)].config(image="", state=NORMAL)
-			flagged.remove(buttonsDict[(row, column)])
+			else:
+				buttonsDict[(row, column)].config(image="", state=NORMAL)
+				flagged.remove(buttonsDict[(row, column)])

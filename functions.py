@@ -3,17 +3,20 @@ from tkinter import messagebox
 import webbrowser
 from buttons import *
 from configparser import *
+from time import *
 
 config = ConfigParser()
 config.read_file(open(r"config.txt"))
 buttonSize = int(config.get("Buttons", "buttonSize"))
 buttonFramePadding = int(config.get("Buttons","framePreHeight"))
 
+
 def defaultDiff(window, frame):
 	global resx
 	global resy
-	rows = int(config.get("Buttons", "defaultRows"))
-	columns = int(config.get("Buttons", "defaultColumns"))
+	
+	rows=int(config.get("Buttons", "defaultRows"))
+	columns=int(config.get("Buttons", "defaultColumns"))
 	resx = buttonSize * columns
 	resy = buttonSize * rows + buttonFramePadding+20
 	window.geometry(f"{resx}x{resy}")
@@ -23,6 +26,8 @@ def getx():
 	return resx
 def gety():
 	return resy
+def getFrame():
+	return buttonFrame
 
 def retryPlace(button):
 	button.place(height=25, width=35, x=(resx-35)/2,y=((buttonFramePadding/2)-25)/2+20)
@@ -30,6 +35,7 @@ def retryPlace(button):
 def difficulty1(window, frame):
 	global resx
 	global resy
+
 	rows = int(config.get("Buttons", "diff1Rows"))
 	columns = int(config.get("Buttons", "diff1Columns"))
 	resx = buttonSize * columns
@@ -41,6 +47,7 @@ def difficulty1(window, frame):
 def difficulty2(window, frame):
 	global resx
 	global resy
+
 	rows = int(config.get("Buttons", "diff2Rows"))
 	columns = int(config.get("Buttons", "diff2Columns"))
 	resx = buttonSize * columns
@@ -52,6 +59,7 @@ def difficulty2(window, frame):
 def difficulty3(window, frame):
 	global resx
 	global resy
+
 	rows = int(config.get("Buttons", "diff3Rows"))
 	columns = int(config.get("Buttons", "diff3Columns"))
 	resx = buttonSize * columns
@@ -82,19 +90,7 @@ def InstructionsInChrome():
 def AboutInChrome():
 	webbrowser.open('www.freeminesweeper.org/help/mineabout.html')
 
-def Credits(frame, difficulty):
-	if difficulty==1:
-		for row in range(0, int(config.get("Buttons", "diff1Rows"))):
-			for column in range(0, int(config.get("Buttons", "diff1Columns"))):
-				buttonsDict[(row, column)].place_forget()
-	if difficulty==2:
-		for row in range(0, int(config.get("Buttons", "diff2Rows"))):
-			for column in range(0, int(config.get("Buttons", "diff2Columns"))):
-				buttonsDict[(row, column)].place_forget()
-	if difficulty==3:
-		for row in range(0, int(config.get("Buttons", "diff3Rows"))):
-			for column in range(0, int(config.get("Buttons", "diff3Columns"))):
-				buttonsDict[(row, column)].place_forget()
+def Credits(window, frame):
 	creditsLabel1=Label(frame, background="grey80", text="Minesweeper {}".format(str(config.get("Buttons","version"))))
 	creditsLabel1.place(x=0,y=0)
 	creditsLabel2=Label(frame, background="grey80", text="")

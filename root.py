@@ -33,11 +33,11 @@ class GUI:
 		self.submenu1.add_command(label="New Game    F2",command=lambda: newGame(diff.get(), master, buttonFrame))
 		self.submenu1.add_separator()
 		self.submenu1.add_radiobutton(label="Beginner", value=1, variable=diff,
-									  command=lambda: [difficulty1(master, buttonFrame), getx(), retryPlace(self.retry)])
+									  command=lambda: [createFrame(), difficulty1(master, buttonFrame), getx(), retryPlace(self.retry)])
 		self.submenu1.add_radiobutton(label="Intermediate", value=2, variable=diff,
-									  command=lambda: [difficulty2(master, buttonFrame), getx(), retryPlace(self.retry)])
+									  command=lambda: [createFrame(), difficulty2(master, buttonFrame), getx(), retryPlace(self.retry)])
 		self.submenu1.add_radiobutton(label="Expert", value=3, variable=diff,
-									  command=lambda: [difficulty3(master, buttonFrame), getx(), retryPlace(self.retry)])
+									  command=lambda: [createFrame(), difficulty3(master, buttonFrame), getx(), retryPlace(self.retry)])
 		self.submenu1.add_separator()
 		self.submenu1.add_command(label="Quit", command=lambda: QuitPrompt(master))
 
@@ -49,8 +49,13 @@ class GUI:
 		self.submenu3.add_separator()
 		self.submenu3.add_command(label="About", command=lambda: AboutInChrome())
 		self.submenu3.add_separator()
-		self.submenu3.add_command(label="Credits", command=lambda: Credits(buttonFrame,diff.get()))
+		self.submenu3.add_command(label="Credits", command=lambda: [createFrame(), Credits(master, buttonFrame)])
 
+		def createFrame():
+			global buttonFrame
+			buttonFrame.destroy()
+			buttonFrame = Frame(self.master, background="grey80")
+			buttonFrame.pack(fill='both', expand=True)
 
 class settings:
 	def __init__(self,master):

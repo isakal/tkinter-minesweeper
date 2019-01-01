@@ -93,16 +93,3 @@ def SourceCode():
 	webbrowser.open('https://github.com/isakal/tkinter-minesweeper')
 
 
-#def Credits(frame, difficulty):
-	#if difficulty == 1:
-		#for row in range(0, int(config.get("Buttons", "diff1Rows"))):
-			#for column in range(0, int(config.get("Buttons", "diff1Columns"))):
-				#buttonsDict[(row, column)].place_forget()
-	#if difficulty == 2:
-		#for row in range(0, int(config.get("Buttons", "diff2Rows"))):
-			#for column in range(0, int(config.get("Buttons", "diff2Columns"))):
-				#buttonsDict[(row, column)].place_forget()
-	#if difficulty == 3:
-		#for row in range(0, int(config.get("Buttons", "diff3Rows"))):
-			#for column in range(0, int(config.get("Buttons", "diff3Columns"))):
-				#buttonsDict[(row, column)].place_forget()

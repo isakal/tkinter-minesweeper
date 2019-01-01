@@ -8,7 +8,8 @@ from time import *
 config = ConfigParser()
 config.read_file(open(r"config.txt"))
 buttonSize = int(config.get("Buttons", "buttonSize"))
-buttonFramePadding = int(config.get("Buttons","framePreHeight"))
+buttonFramePadding = int(config.get("Buttons", "framePreHeight"))
+
 
 
 def defaultDiff(window, frame):
@@ -18,19 +19,24 @@ def defaultDiff(window, frame):
 	rows=int(config.get("Buttons", "defaultRows"))
 	columns=int(config.get("Buttons", "defaultColumns"))
 	resx = buttonSize * columns
-	resy = buttonSize * rows + buttonFramePadding+20
+	resy = buttonSize * rows + buttonFramePadding + 20
 	window.geometry(f"{resx}x{resy}")
 	buttonsDiff1(frame, rows, columns)
 
+
 def getx():
 	return resx
+
+
 def gety():
 	return resy
 def getFrame():
 	return buttonFrame
 
+
 def retryPlace(button):
-	button.place(height=25, width=35, x=(resx-35)/2,y=((buttonFramePadding/2)-25)/2+20)
+	button.place(height=25, width=35, x=(resx - 35) / 2, y=((buttonFramePadding / 2) - 25) / 2 + 20)
+
 
 def difficulty1(window, frame):
 	global resx
@@ -69,11 +75,11 @@ def difficulty3(window, frame):
 
 
 def newGame(difficulty, window, frame):
-	if difficulty==1:
+	if difficulty == 1:
 		difficulty1(window, frame)
-	elif difficulty==2:
+	elif difficulty == 2:
 		difficulty2(window, frame)
-	elif difficulty==3:
+	elif difficulty == 3:
 		difficulty3(window, frame)
 
 
@@ -99,5 +105,15 @@ def Credits(window, frame):
 	creditsLabel3.place(x=0,y=40)
 	creditsLabel4=Label(frame, background="grey80", text="Ivan Sakal aka Saki")
 	creditsLabel4.place(x=0,y=60)
+	creditsButton1=Button(frame, background="grey80", text="GitHub", command=SakiGithub, relief=FLAT)
+	creditsButton1.place(x=160,y=58)
 	creditsLabel5=Label(frame, background="grey80", text="Davor Najev aka Spinzed")
 	creditsLabel5.place(x=0,y=80)
+	creditsButton1=Button(frame, background="grey80", text="GitHub", command=SpinGithub, relief=FLAT)
+	creditsButton1.place(x=160,y=78)
+
+def SakiGithub():
+	webbrowser.open("https://github.com/isakal")
+
+def SpinGithub():
+	webbrowser.open("https://github.com/Spinzed")

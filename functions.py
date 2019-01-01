@@ -28,8 +28,6 @@ def getx():
 	return resx
 def gety():
 	return resy
-def getFrame():
-	return buttonFrame
 
 
 def difficulty1(window, frame):

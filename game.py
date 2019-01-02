@@ -5,12 +5,15 @@ from functions import *
 config = ConfigParser()
 config.read_file(open(r"config.txt"))
 buttonSize = int(config.get("Buttons", "buttonSize"))
+difficulty=1
 
-def newGame(difficulty, window, frame):
+def newGame(diff, window, frame):
+	global difficulty
+	difficulty=diff
 	global gameStarted
 	if difficulty == 1:
 		maxbombs = 10
-		difficulty1(window, frame)
+		difficulty1(window, frame, True)
 		for i in range(0, maxbombs):
 			randomRow = randint(0, int(config.get("Buttons", "diff1Rows")) - 1)
 			randomColumn = randint(0, int(config.get("Buttons", "diff1Columns")) - 1)
@@ -23,7 +26,7 @@ def newGame(difficulty, window, frame):
 
 	elif difficulty == 2:
 		maxbombs = 17
-		difficulty2(window, frame)
+		difficulty2(window, frame, True)
 		for i in range(0, maxbombs):
 			randomRow = randint(0, int(config.get("Buttons", "diff2Rows")) - 1)
 			randomColumn = randint(0, int(config.get("Buttons", "diff2Columns")) - 1)
@@ -36,7 +39,7 @@ def newGame(difficulty, window, frame):
 
 	elif difficulty == 3:
 		maxbombs = 27
-		difficulty3(window, frame)
+		difficulty3(window, frame, True)
 		for i in range(0, maxbombs):
 			randomRow = randint(0, int(config.get("Buttons", "diff3Rows")) - 1)
 			randomColumn = randint(0, int(config.get("Buttons", "diff3Columns")) - 1)
@@ -50,10 +53,9 @@ def newGame(difficulty, window, frame):
 	gameStarted = True
 
 
-def gridCreate(frame, rows, columns):
-	global gameStarted
-	print(gameStarted)
+def crateButtonGrid(frame, rows, columns, isGameStarted, difficulty):
 	buttonsDict.clear()
+	flagged.clear()
 	for row in range(0, rows):
 		for column in range(0, columns):
 			gridButton = Button(frame, bg="grey75", state=DISABLED)
@@ -61,7 +63,7 @@ def gridCreate(frame, rows, columns):
 			buttonsDict[(row, column)].place(height=buttonSize, width=buttonSize, x=column * buttonSize,
 											 y=row * buttonSize)
 			buttonsDict[(row, column)].bind('<Button-3>',
-											lambda event, row=row, column=column: flag(row, column))
+											lambda event, row=row, column=column, gameStarted=isGameStarted: flag(row, column, isGameStarted, difficulty))
 
 
 def giveButtonsFunction(frame, rows, columns):
@@ -80,17 +82,26 @@ def sink(row, column):
 		buttonsDict[(row, column)].image = bombImage
 
 
-def flag(row, column):
-	global gameStarted
-	print (gameStarted)
-	if gameStarted:
-		if buttonsDict[(row, column)] not in sunken:
-			if buttonsDict[(row, column)] not in flagged:
-				flagImage = PhotoImage(file="flag.gif")
-				buttonsDict[(row, column)].config(image=flagImage, state=DISABLED)
-				buttonsDict[(row, column)].image = flagImage
-				flagged.append(buttonsDict[(row, column)])
-
-			else:
-				buttonsDict[(row, column)].config(image="", state=NORMAL)
-				flagged.remove(buttonsDict[(row, column)])
+def flag(row, column, isGameStarted, difficulty):
+	if isGameStarted:
+		if buttonsDict[(row, column)] not in flagged:
+			if isGameStarted==True and buttonsDict[(row, column)] not in sunken:
+				if difficulty==1 and len(flagged) < int(config.get("Buttons", "diff1MaxFlags")):
+					flagImage = PhotoImage(file="flag.gif")
+					buttonsDict[(row, column)].config(image=flagImage, state=DISABLED)
+					buttonsDict[(row, column)].image = flagImage
+					flagged.append(buttonsDict[(row, column)])
+				if difficulty==2 and len(flagged) < int(config.get("Buttons", "diff2MaxFlags")):
+					flagImage = PhotoImage(file="flag.gif")
+					buttonsDict[(row, column)].config(image=flagImage, state=DISABLED)
+					buttonsDict[(row, column)].image = flagImage
+					flagged.append(buttonsDict[(row, column)])
+				if difficulty==3 and len(flagged) < int(config.get("Buttons", "diff3MaxFlags")):
+					flagImage = PhotoImage(file="flag.gif")
+					buttonsDict[(row, column)].config(image=flagImage, state=DISABLED)
+					buttonsDict[(row, column)].image = flagImage
+					flagged.append(buttonsDict[(row, column)])
+		else:
+			buttonsDict[(row, column)].config(image="", state=NORMAL)
+			flagged.remove(buttonsDict[(row, column)])
+	

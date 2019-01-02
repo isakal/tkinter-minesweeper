@@ -25,7 +25,7 @@ def difficultyDefault(window, frame):
 	resx = buttonSize * columns
 	resy = buttonSize * rows + buttonFramePadding + 20
 	window.geometry(f"{resx}x{resy}")
-	game.gridCreate(frame, rows, columns)
+	game.crateButtonGrid(frame, rows, columns, False, 1)
 
 
 def getx():
@@ -36,9 +36,9 @@ def gety():
 	return resy
 
 
-def difficulty1(window, frame):
+def difficulty1(window, frame, isGameStarted):
 	global gameStarted
-	gameStarted=False
+	gameStarted=isGameStarted
 	import game
 	global resx
 	global resy
@@ -48,11 +48,10 @@ def difficulty1(window, frame):
 	resx = buttonSize * columns
 	resy = buttonSize * rows + buttonFramePadding
 	window.geometry(f"{resx}x{resy}")
-	game.gridCreate(frame, rows, columns)
-	print(gameStarted)
+	game.crateButtonGrid(frame, rows, columns, isGameStarted, 1)
 
 
-def difficulty2(window, frame):
+def difficulty2(window, frame, isGameStarted):
 	global gameStarted
 	gameStarted=False
 	import game
@@ -64,10 +63,10 @@ def difficulty2(window, frame):
 	resx = buttonSize * columns
 	resy = buttonSize * rows + buttonFramePadding
 	window.geometry(f"{resx}x{resy}")
-	game.gridCreate(frame, rows, columns)
+	game.crateButtonGrid(frame, rows, columns, isGameStarted, 2)
 
 
-def difficulty3(window, frame):
+def difficulty3(window, frame, isGameStarted):
 	global gameStarted
 	gameStarted=False
 	import game
@@ -79,7 +78,9 @@ def difficulty3(window, frame):
 	resx = buttonSize * columns
 	resy = buttonSize * rows + buttonFramePadding
 	window.geometry(f"{resx}x{resy}")
-	game.gridCreate(frame, rows, columns)
+	game.crateButtonGrid(frame, rows, columns, isGameStarted, 3)
+
+#TODO: Merge upper 3 functions into one 
 
 
 def QuitPrompt(window):

@@ -33,11 +33,11 @@ class GUI:
 		self.submenu1.add_command(label="New Game    F2", command=lambda: newGame(diff.get(), master, buttonFrame))
 		self.submenu1.add_separator()
 		self.submenu1.add_radiobutton(label="Beginner", value=1, variable=diff,
-									  command=lambda: [createFrame(), difficulty1(master, buttonFrame)])
+									  command=lambda: [createFrame(), difficulty1(master, buttonFrame, False)])
 		self.submenu1.add_radiobutton(label="Intermediate", value=2, variable=diff,
-									  command=lambda: [createFrame(), difficulty2(master, buttonFrame)])
+									  command=lambda: [createFrame(), difficulty2(master, buttonFrame, False)])
 		self.submenu1.add_radiobutton(label="Expert", value=3, variable=diff,
-									  command=lambda: [createFrame(), difficulty3(master, buttonFrame)])
+									  command=lambda: [createFrame(), difficulty3(master, buttonFrame, False)])
 		self.submenu1.add_separator()
 		self.submenu1.add_command(label="Quit", command=lambda: QuitPrompt(master))
 

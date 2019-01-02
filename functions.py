@@ -23,7 +23,7 @@ def difficultyDefault(window, frame):
 	rows = int(config.get("Buttons", "defaultRows"))
 	columns = int(config.get("Buttons", "defaultColumns"))
 	resx = buttonSize * columns
-	resy = buttonSize * rows + buttonFramePadding + 20
+	resy = buttonSize * (rows+1) + buttonFramePadding + 20
 	window.geometry(f"{resx}x{resy}")
 	game.crateButtonGrid(frame, rows, columns, False, 1)
 
@@ -46,7 +46,7 @@ def difficulty1(window, frame, isGameStarted):
 	rows = int(config.get("Buttons", "diff1Rows"))
 	columns = int(config.get("Buttons", "diff1Columns"))
 	resx = buttonSize * columns
-	resy = buttonSize * rows + buttonFramePadding
+	resy = buttonSize * (rows+1) + buttonFramePadding
 	window.geometry(f"{resx}x{resy}")
 	game.crateButtonGrid(frame, rows, columns, isGameStarted, 1)
 
@@ -61,7 +61,7 @@ def difficulty2(window, frame, isGameStarted):
 	rows = int(config.get("Buttons", "diff2Rows"))
 	columns = int(config.get("Buttons", "diff2Columns"))
 	resx = buttonSize * columns
-	resy = buttonSize * rows + buttonFramePadding
+	resy = buttonSize * (rows+1) + buttonFramePadding
 	window.geometry(f"{resx}x{resy}")
 	game.crateButtonGrid(frame, rows, columns, isGameStarted, 2)
 
@@ -76,7 +76,7 @@ def difficulty3(window, frame, isGameStarted):
 	rows = int(config.get("Buttons", "diff3Rows"))
 	columns = int(config.get("Buttons", "diff3Columns"))
 	resx = buttonSize * columns
-	resy = buttonSize * rows + buttonFramePadding
+	resy = buttonSize * (rows+1) + buttonFramePadding
 	window.geometry(f"{resx}x{resy}")
 	game.crateButtonGrid(frame, rows, columns, isGameStarted, 3)
 

@@ -84,13 +84,16 @@ def reveal(row, column):
 	else:
 		for relativeRow in range(0,3):
 			for relativeColumn in range(0,3):
-				decoyRow=relativeRow
-				decoyColumn=relativeColumn
-				if decoyRow < 1:
-					decoyRow = 1
-				if decoyColumn < 1:
-					decoyColumn = 1
-				if buttonsDict[(row-1+decoyRow, column-1+decoyColumn)] in bomb:
+				skip=False
+				differenceRow=row-relativeRow+1
+				differenceColumn=column-relativeColumn+1
+				if differenceRow < 0:
+					differenceRow = 0
+					skip=True
+				if differenceColumn< 0:
+					differenceColumn = 0
+					skip=True
+				if buttonsDict[(differenceRow, differenceColumn)] in bomb and skip==False:
 					closeBombs+=1
 		if closeBombs>0:
 			buttonsDict[(row, column)].config(text=closeBombs)

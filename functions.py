@@ -1,7 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
 import webbrowser
-from buttons import *
 from configparser import *
 from random import *
 
@@ -9,9 +8,15 @@ config = ConfigParser()
 config.read_file(open(r"config.txt"))
 buttonSize = int(config.get("Buttons", "buttonSize"))
 buttonFramePadding = int(config.get("Buttons", "framePreHeight"))
+buttonsDict = {}
+flagged = []
+sunken = []
+bomb = []
+gameStarted = False
 
 
-def defaultDiff(window, frame):
+def difficultyDefault(window, frame):
+	import game
 	global resx
 	global resy
 
@@ -20,7 +25,7 @@ def defaultDiff(window, frame):
 	resx = buttonSize * columns
 	resy = buttonSize * rows + buttonFramePadding + 20
 	window.geometry(f"{resx}x{resy}")
-	gridCreate(frame, rows, columns, False)
+	game.gridCreate(frame, rows, columns)
 
 
 def getx():
@@ -31,7 +36,10 @@ def gety():
 	return resy
 
 
-def difficulty1(window, frame, isGameStarted):
+def difficulty1(window, frame):
+	global gameStarted
+	gameStarted=False
+	import game
 	global resx
 	global resy
 
@@ -40,10 +48,14 @@ def difficulty1(window, frame, isGameStarted):
 	resx = buttonSize * columns
 	resy = buttonSize * rows + buttonFramePadding
 	window.geometry(f"{resx}x{resy}")
-	gridCreate(frame, rows, columns, isGameStarted)
+	game.gridCreate(frame, rows, columns)
+	print(gameStarted)
 
 
-def difficulty2(window, frame, isGameStarted):
+def difficulty2(window, frame):
+	global gameStarted
+	gameStarted=False
+	import game
 	global resx
 	global resy
 
@@ -52,10 +64,13 @@ def difficulty2(window, frame, isGameStarted):
 	resx = buttonSize * columns
 	resy = buttonSize * rows + buttonFramePadding
 	window.geometry(f"{resx}x{resy}")
-	gridCreate(frame, rows, columns, isGameStarted)
+	game.gridCreate(frame, rows, columns)
 
 
-def difficulty3(window, frame, isGameStarted):
+def difficulty3(window, frame):
+	global gameStarted
+	gameStarted=False
+	import game
 	global resx
 	global resy
 
@@ -64,50 +79,7 @@ def difficulty3(window, frame, isGameStarted):
 	resx = buttonSize * columns
 	resy = buttonSize * rows + buttonFramePadding
 	window.geometry(f"{resx}x{resy}")
-	gridCreate(frame, rows, columns, isGameStarted)
-
-
-def newGame(difficulty, window, frame):
-	global gameStarted
-	gameStarted = True
-	if difficulty == 1:
-		maxbombs = 10
-		difficulty1(window, frame, gameStarted)
-		for i in range(0, maxbombs):
-			randomRow = randint(0, int(config.get("Buttons", "diff1Rows")) - 1)
-			randomColumn = randint(0, int(config.get("Buttons", "diff1Columns")) - 1)
-			while buttonsDict[(randomRow, randomColumn)] in bomb:
-				randomRow = randint(0, int(config.get("Buttons", "diff1Rows")) - 1)
-				randomColumn = randint(0, int(config.get("Buttons", "diff1Columns")) - 1)
-			bomb.append(buttonsDict[(randomRow, randomColumn)])
-		giveButtonsFunction(frame, int(config.get("Buttons", "diff1Rows")),
-							int(config.get("Buttons", "diff1Columns")))
-
-	elif difficulty == 2:
-		maxbombs = 17
-		difficulty2(window, frame, gameStarted)
-		for i in range(0, maxbombs):
-			randomRow = randint(0, int(config.get("Buttons", "diff1Rows")) - 1)
-			randomColumn = randint(0, int(config.get("Buttons", "diff1Columns")) - 1)
-			while buttonsDict[(randomRow, randomColumn)] in bomb:
-				randomRow = randint(0, int(config.get("Buttons", "diff1Rows")) - 1)
-				randomColumn = randint(0, int(config.get("Buttons", "diff1Columns")) - 1)
-			bomb.append(buttonsDict[(randomRow, randomColumn)])
-		giveButtonsFunction(frame, int(config.get("Buttons", "diff2Rows")),
-							int(config.get("Buttons", "diff2Columns")))
-
-	elif difficulty == 3:
-		maxbombs = 27
-		difficulty3(window, frame, gameStarted)
-		for i in range(0, maxbombs):
-			randomRow = randint(0, int(config.get("Buttons", "diff1Rows")) - 1)
-			randomColumn = randint(0, int(config.get("Buttons", "diff1Columns")) - 1)
-			while buttonsDict[(randomRow, randomColumn)] in bomb:
-				randomRow = randint(0, int(config.get("Buttons", "diff1Rows")) - 1)
-				randomColumn = randint(0, int(config.get("Buttons", "diff1Columns")) - 1)
-			bomb.append(buttonsDict[(randomRow, randomColumn)])
-		giveButtonsFunction(frame, int(config.get("Buttons", "diff3Rows")),
-							int(config.get("Buttons", "diff3Columns")))
+	game.gridCreate(frame, rows, columns)
 
 
 def QuitPrompt(window):

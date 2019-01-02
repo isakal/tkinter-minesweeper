@@ -1,5 +1,5 @@
 from tkinter import *
-from buttons import *
+from game import *
 from functions import *
 from configparser import *
 
@@ -15,7 +15,7 @@ class GUI:
 		framePre.pack(fill=X, ipady=buttonFramePadding / 2)
 		buttonFrame = Frame(master, background="grey80")
 		buttonFrame.pack(fill='both', expand=True)
-		defaultDiff(master, buttonFrame)
+		difficultyDefault(master, buttonFrame)
 		resx = getx()
 		resy = gety()
 
@@ -33,11 +33,11 @@ class GUI:
 		self.submenu1.add_command(label="New Game    F2", command=lambda: newGame(diff.get(), master, buttonFrame))
 		self.submenu1.add_separator()
 		self.submenu1.add_radiobutton(label="Beginner", value=1, variable=diff,
-									  command=lambda: [createFrame(), difficulty1(master, buttonFrame), getx(), retryPlace(self.retry)])
+									  command=lambda: [createFrame(), difficulty1(master, buttonFrame)])
 		self.submenu1.add_radiobutton(label="Intermediate", value=2, variable=diff,
-									  command=lambda: [createFrame(), difficulty2(master, buttonFrame), getx(), retryPlace(self.retry)])
+									  command=lambda: [createFrame(), difficulty2(master, buttonFrame)])
 		self.submenu1.add_radiobutton(label="Expert", value=3, variable=diff,
-									  command=lambda: [createFrame(), difficulty3(master, buttonFrame), getx(), retryPlace(self.retry)])
+									  command=lambda: [createFrame(), difficulty3(master, buttonFrame)])
 		self.submenu1.add_separator()
 		self.submenu1.add_command(label="Quit", command=lambda: QuitPrompt(master))
 
@@ -56,6 +56,7 @@ class GUI:
 			buttonFrame.destroy()
 			buttonFrame = Frame(self.master, background="grey80")
 			buttonFrame.pack(fill='both', expand=True)
+		#This function stayed in root.py because when I put it in functions.py it throws me an error that frame is not defined
 
 class settings:
 	def __init__(self, master):

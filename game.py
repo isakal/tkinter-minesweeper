@@ -69,17 +69,32 @@ def crateButtonGrid(frame, rows, columns, isGameStarted, difficulty):
 def giveButtonsFunction(frame, rows, columns):
 	for row in range(0, rows):
 		for column in range(0, columns):
-			buttonsDict[(row, column)].config(command=lambda row=row, column=column: sink(row, column),
+			buttonsDict[(row, column)].config(command=lambda row=row, column=column: reveal(row, column),
 											  state=NORMAL)
 
 
-def sink(row, column):
+def reveal(row, column):
+	closeBombs=0
 	buttonsDict[(row, column)].config(relief=SUNKEN, bg="white", state=DISABLED)
 	sunken.append(buttonsDict[(row, column)])
 	if buttonsDict[(row, column)] in bomb:
 		bombImage = PhotoImage(file="bomb.gif")
 		buttonsDict[(row, column)].config(image=bombImage)
 		buttonsDict[(row, column)].image = bombImage
+	else:
+		for relativeRow in range(0,3):
+			for relativeColumn in range(0,3):
+				decoyRow=relativeRow
+				decoyColumn=relativeColumn
+				if decoyRow < 0:
+					decoyRow = 0
+				if decoyColumn < 0:
+					decoyColumn = 0
+				if buttonsDict[(row-1+decoyRow, column-1+decoyColumn)] in bomb:
+					closeBombs+=1
+		if closeBombs>0:
+			buttonsDict[(row, column)].config(text=closeBombs)
+
 
 
 def flag(row, column, isGameStarted, difficulty):

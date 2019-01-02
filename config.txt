@@ -9,4 +9,7 @@ diff2Rows=10
 diff2Columns=15
 diff3Rows=15
 diff3Columns=20
+diff1MaxFlags=10
+diff2MaxFlags=40
+diff3MaxFlags=99
 version=preAlpha

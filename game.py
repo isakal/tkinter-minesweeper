@@ -69,11 +69,11 @@ def crateButtonGrid(frame, rows, columns, isGameStarted, difficulty):
 def giveButtonsFunction(frame, rows, columns):
 	for row in range(0, rows):
 		for column in range(0, columns):
-			buttonsDict[(row, column)].config(command=lambda row=row, column=column: reveal(row, column),
+			buttonsDict[(row, column)].config(command=lambda row=row, column=column: reveal(row, column, difficulty),
 											  state=NORMAL)
 
 
-def reveal(row, column):
+def reveal(row, column, difficulty):
 	closeBombs=0
 	buttonsDict[(row, column)].config(relief=SUNKEN, bg="white", state=DISABLED)
 	sunken.append(buttonsDict[(row, column)])
@@ -93,6 +93,30 @@ def reveal(row, column):
 				if differenceColumn< 0:
 					differenceColumn = 0
 					skip=True
+
+				if difficulty == 1:
+					if differenceRow == int(config.get("Buttons", "diff1Rows")):
+						differenceRow-=1
+						skip=True
+					if differenceColumn == int(config.get("Buttons", "diff1Columns")):
+						differenceColumn-=1
+						skip=True
+				if difficulty == 2:
+					if differenceRow == int(config.get("Buttons", "diff2Rows")):
+						differenceRow-=1
+						skip=True
+					if differenceColumn == int(config.get("Buttons", "diff2Columns")):
+						differenceColumn-=1
+						skip=True
+				if difficulty == 3:
+					if differenceRow == int(config.get("Buttons", "diff3Rows")):
+						differenceRow-=1
+						skip=True
+					if differenceColumn == int(config.get("Buttons", "diff3Columns")):
+						differenceColumn-=1
+						skip=True
+
+				
 				if buttonsDict[(differenceRow, differenceColumn)] in bomb and skip==False:
 					closeBombs+=1
 		if closeBombs>0:

@@ -16,8 +16,6 @@ class GUI:
 		buttonFrame = Frame(master, background="grey80")
 		buttonFrame.pack(fill='both', expand=True)
 		difficultyDefault(master, buttonFrame)
-		resx = getx()
-		resy = gety()
 
 		self.startButton = Button(framePre,text="Start New Game",command=lambda:[newGame(diff.get(),master,buttonFrame),self.startButton.destroy()])
 		self.startButton.pack()
@@ -33,11 +31,11 @@ class GUI:
 		self.submenu1.add_command(label="New Game    F2", command=lambda: newGame(diff.get(), master, buttonFrame))
 		self.submenu1.add_separator()
 		self.submenu1.add_radiobutton(label="Beginner", value=1, variable=diff,
-									  command=lambda: [createFrame(), difficulty1(master, buttonFrame, False)])
+									  command=lambda: [createFrame(), difficultySettings(master, buttonFrame, diff.get(), False)])
 		self.submenu1.add_radiobutton(label="Intermediate", value=2, variable=diff,
-									  command=lambda: [createFrame(), difficulty2(master, buttonFrame, False)])
+									  command=lambda: [createFrame(), difficultySettings(master, buttonFrame, diff.get(), False)])
 		self.submenu1.add_radiobutton(label="Expert", value=3, variable=diff,
-									  command=lambda: [createFrame(), difficulty3(master, buttonFrame, False)])
+									  command=lambda: [createFrame(), difficultySettings(master, buttonFrame, diff.get(), False)])
 		self.submenu1.add_separator()
 		self.submenu1.add_command(label="Quit", command=lambda: QuitPrompt(master))
 

@@ -13,6 +13,7 @@ flagged = []
 sunken = []
 bomb = []
 gameStarted = False
+difficulty=1
 
 
 def difficultyDefault(window, frame):
@@ -20,67 +21,29 @@ def difficultyDefault(window, frame):
 	global resx
 	global resy
 
-	rows = int(config.get("Buttons", "defaultRows"))
-	columns = int(config.get("Buttons", "defaultColumns"))
+	rows = int(config.get("Default", "rows"))
+	columns = int(config.get("Default", "columns"))
 	resx = buttonSize * columns
 	resy = buttonSize * (rows+1) + buttonFramePadding + 20
 	window.geometry(f"{resx}x{resy}")
 	game.crateButtonGrid(frame, rows, columns, False, 1)
 
 
-def getx():
-	return resx
-
-
-def gety():
-	return resy
-
-
-def difficulty1(window, frame, isGameStarted):
+def difficultySettings(window, frame, diff, isGameStarted):
+	global difficulty
+	difficulty=diff
 	global gameStarted
 	gameStarted=isGameStarted
 	import game
 	global resx
 	global resy
 
-	rows = int(config.get("Buttons", "diff1Rows"))
-	columns = int(config.get("Buttons", "diff1Columns"))
+	rows = int(config.get("Difficulty{}".format(str(difficulty)), "rows"))
+	columns = int(config.get("Difficulty{}".format(str(difficulty)), "columns"))
 	resx = buttonSize * columns
 	resy = buttonSize * (rows+1) + buttonFramePadding
 	window.geometry(f"{resx}x{resy}")
-	game.crateButtonGrid(frame, rows, columns, isGameStarted, 1)
-
-
-def difficulty2(window, frame, isGameStarted):
-	global gameStarted
-	gameStarted=False
-	import game
-	global resx
-	global resy
-
-	rows = int(config.get("Buttons", "diff2Rows"))
-	columns = int(config.get("Buttons", "diff2Columns"))
-	resx = buttonSize * columns
-	resy = buttonSize * (rows+1) + buttonFramePadding
-	window.geometry(f"{resx}x{resy}")
-	game.crateButtonGrid(frame, rows, columns, isGameStarted, 2)
-
-
-def difficulty3(window, frame, isGameStarted):
-	global gameStarted
-	gameStarted=False
-	import game
-	global resx
-	global resy
-
-	rows = int(config.get("Buttons", "diff3Rows"))
-	columns = int(config.get("Buttons", "diff3Columns"))
-	resx = buttonSize * columns
-	resy = buttonSize * (rows+1) + buttonFramePadding
-	window.geometry(f"{resx}x{resy}")
-	game.crateButtonGrid(frame, rows, columns, isGameStarted, 3)
-
-#TODO: Merge upper 3 functions into one 
+	game.crateButtonGrid(frame, rows, columns, isGameStarted, difficulty)
 
 
 def QuitPrompt(window):

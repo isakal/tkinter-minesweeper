@@ -12,6 +12,7 @@ buttonsDict = {}
 flagged = []
 sunken = []
 bomb = []
+zeroTagged = []
 gameStarted = False
 difficulty=1
 

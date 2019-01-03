@@ -45,50 +45,73 @@ def giveButtonsFunction(frame, rows, columns):
 
 
 def reveal(row, column, difficulty):
-	closeBombs=0
 	buttonsDict[(row, column)].config(relief=SUNKEN, bg="white", state=DISABLED)
 	sunken.append(buttonsDict[(row, column)])
 	if buttonsDict[(row, column)] in bomb:
-		revealAllBombs(row, column)
+		revealAllBombs()
 		bombImage = PhotoImage(file="bomb.gif")
-		buttonsDict[(row, column)].config(image=bombImage,bg="pink")
+		buttonsDict[(row, column)].config(image=bombImage)
 		buttonsDict[(row, column)].image = bombImage
 	else:
-		for relativeRow in range(0,3):
-			for relativeColumn in range(0,3):
+		countBombs(row, column, difficulty)
+
+
+def countBombs(row, column, difficulty):
+	closeBombs=0
+	for relativeRow in range(0,3):
+		for relativeColumn in range(0,3):
+			skip=False
+			differenceRow=row-relativeRow+1
+			differenceColumn=column-relativeColumn+1
+			if differenceRow < 0:
+				differenceRow = 0
+				skip=True
+			if differenceColumn < 0:
+				differenceColumn = 0
+				skip=True
+			if differenceRow == int(config.get("Difficulty{}".format(str(difficulty)), "rows")):
+				differenceRow-=1
+				skip=True
+			if differenceColumn == int(config.get("Difficulty{}".format(str(difficulty)), "columns")):
+				differenceColumn-=1
+				skip=True			
+			if buttonsDict[(differenceRow, differenceColumn)] in bomb and skip==False:
+				closeBombs+=1
+			if closeBombs>0:
+				buttonsDict[(row, column)].config(text=closeBombs)
+	if closeBombs == 0:
+		for zeroRow in range(0,3):
+			for zeroColumn in range(0,3):
 				skip=False
-				differenceRow=row-relativeRow+1
-				differenceColumn=column-relativeColumn+1
+				differenceRow=row-zeroRow+1
+				differenceColumn=column-zeroColumn+1
 				if differenceRow < 0:
 					differenceRow = 0
 					skip=True
 				if differenceColumn < 0:
 					differenceColumn = 0
 					skip=True
-				if differenceRow == int(config.get(f"Difficulty{str(difficulty)}", "rows")):
+				if differenceRow == int(config.get("Difficulty{}".format(str(difficulty)), "rows")):
 					differenceRow-=1
 					skip=True
-				if differenceColumn == int(config.get(f"Difficulty{str(difficulty)}", "columns")):
+				if differenceColumn == int(config.get("Difficulty{}".format(str(difficulty)), "columns")):
 					differenceColumn-=1
-					skip=True			
-				if buttonsDict[(differenceRow, differenceColumn)] in bomb and skip==False:
-					closeBombs+=1
-		if closeBombs>0:
-			buttonsDict[(row, column)].config(text=closeBombs)
+					skip=True
+				if buttonsDict[(differenceRow,differenceColumn)] not in zeroTagged and skip == False:
+					zeroTagged.append(buttonsDict[(differenceRow,differenceColumn)])
+					buttonsDict[(differenceRow,differenceColumn)].config(relief=SUNKEN, bg="white", state=DISABLED)
+					countBombs(differenceRow,differenceColumn,difficulty)
 
 
-def revealAllBombs(row,column):
+def revealAllBombs():
+	print(buttonsDict)
 	bombImage = PhotoImage(file="bomb.gif")
-
-	for row in range(0, row):
-		for column in range(0, column):
-			if buttonsDict[(row,column)] in bomb:
-				buttonsDict[(row, column)].config(image=bombImage, bg="white")
-				buttonsDict[(row, column)].image = bombImage
-
-
-
-
+	for button in bomb:
+		button.config(image=bombImage, bg="white", relief=SUNKEN)
+		button.image = bombImage
+	for row in range (0, int(config.get("Difficulty{}".format(str(difficulty)), "rows"))):
+		for column in range (0, int(config.get("Difficulty{}".format(str(difficulty)),"columns"))):
+			buttonsDict[(row,column)].config(state=DISABLED)
 
 
 def flag(row, column, isGameStarted, difficulty):

@@ -10,7 +10,7 @@ def newGame(diff, window, frame):
 	global difficulty
 	global gameStarted
 	difficulty=diff
-	bombs = int(config.get("Difficulty{}".format(str(difficulty)), "bombs")) - 1
+	bombs = int(config.get("Difficulty{}".format(str(difficulty)), "bombs"))
 	difficultySettings(window, frame, difficulty, True)
 	for i in range(0, bombs):
 		randomRow = randint(0, int(config.get("Difficulty{}".format(str(difficulty)), "rows")) - 1)

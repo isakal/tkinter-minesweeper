@@ -48,9 +48,9 @@ def reveal(row, column, difficulty):
 	buttonsDict[(row, column)].config(relief=SUNKEN, bg="white", state=DISABLED)
 	sunken.append(buttonsDict[(row, column)])
 	if buttonsDict[(row, column)] in bomb:
-		revealAllBombs()
+		revealAllBombs(row, column)
 		bombImage = PhotoImage(file="bomb.gif")
-		buttonsDict[(row, column)].config(image=bombImage)
+		buttonsDict[(row, column)].config(image=bombImage, background="red")
 		buttonsDict[(row, column)].image = bombImage
 	else:
 		countBombs(row, column, difficulty)
@@ -103,7 +103,7 @@ def countBombs(row, column, difficulty):
 					countBombs(differenceRow,differenceColumn,difficulty)
 
 
-def revealAllBombs():
+def revealAllBombs(row, column):
 	bombImage = PhotoImage(file="bomb.gif")
 	for button in bomb:
 		button.config(image=bombImage, bg="white", relief=SUNKEN)

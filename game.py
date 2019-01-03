@@ -104,7 +104,6 @@ def countBombs(row, column, difficulty):
 
 
 def revealAllBombs():
-	print(buttonsDict)
 	bombImage = PhotoImage(file="bomb.gif")
 	for button in bomb:
 		button.config(image=bombImage, bg="white", relief=SUNKEN)

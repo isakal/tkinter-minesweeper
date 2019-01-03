@@ -1,7 +1,7 @@
 [Buttons]
 buttonSize=25
 framePreHeight=80
-
+version = Beta
 [Default]
 rows=10
 columns=10

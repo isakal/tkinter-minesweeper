@@ -25,7 +25,7 @@ def difficultyDefault(window, frame):
 	rows = int(config.get("Default", "rows"))
 	columns = int(config.get("Default", "columns"))
 	resx = buttonSize * columns
-	resy = buttonSize * (rows+1) + buttonFramePadding + 20
+	resy = buttonSize * rows + buttonFramePadding + 20
 	window.geometry(f"{resx}x{resy}")
 	game.crateButtonGrid(frame, rows, columns, False, 1)
 
@@ -42,7 +42,7 @@ def difficultySettings(window, frame, diff, isGameStarted):
 	rows = int(config.get("Difficulty{}".format(str(difficulty)), "rows"))
 	columns = int(config.get("Difficulty{}".format(str(difficulty)), "columns"))
 	resx = buttonSize * columns
-	resy = buttonSize * (rows+1) + buttonFramePadding
+	resy = buttonSize * rows + buttonFramePadding
 	window.geometry(f"{resx}x{resy}")
 	game.crateButtonGrid(frame, rows, columns, isGameStarted, difficulty)
 

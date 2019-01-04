@@ -10,15 +10,18 @@ config.read_file(open(r"config.txt"))
 class GUI:
 	def __init__(self, master):
 		global buttonFrame
+		global startButton
+		global framePre
 		self.master = master
 		framePre = Frame(master, background="grey17")
 		framePre.pack(fill=X, ipady=buttonFramePadding / 2)
 		buttonFrame = Frame(master, background="grey80")
 		buttonFrame.pack(fill='both', expand=True)
 		difficultyDefault(master, buttonFrame)
+		print(framePre)
 
-		self.startButton = Button(framePre,text="Start New Game",command=lambda:[newGame(diff.get(),master,buttonFrame),self.startButton.destroy()])
-		self.startButton.pack()
+		startButton = Button(framePre,text="Start New Game",command=lambda:[newGame(diff.get(),master,buttonFrame,framePre), startButton.destroy()])
+		startButton.place(relx=0.5, rely=0.5, anchor=CENTER)
 
 		self.menu = Menu(master, tearoff=0)
 		master.config(menu=self.menu)
@@ -28,7 +31,7 @@ class GUI:
 		self.submenu3 = Menu(self.menu, tearoff=0)
 
 		self.menu.add_cascade(label="Game", menu=self.submenu1)
-		self.submenu1.add_command(label="New Game    F2", command=lambda: newGame(diff.get(), master, buttonFrame))
+		self.submenu1.add_command(label="New Game    F2", command=lambda: newGame(diff.get(), master, buttonFrame, framePre))
 		self.submenu1.add_separator()
 		self.submenu1.add_radiobutton(label="Beginner", value=1, variable=diff,
 									  command=lambda: [createFrame(), difficultySettings(master, buttonFrame, diff.get(), False)])
@@ -48,13 +51,13 @@ class GUI:
 		self.submenu3.add_command(label="About", command=lambda: AboutInChrome())
 		self.submenu3.add_separator()
 		self.submenu3.add_command(label="Credits", command=lambda: [createFrame(), Credits(master, buttonFrame)])
-
+		
 		def createFrame():
 			global buttonFrame
 			buttonFrame.destroy()
 			buttonFrame = Frame(self.master, background="grey80")
 			buttonFrame.pack(fill='both', expand=True)
-		#This function stayed in root.py because when I put it in functions.py it throws me an error that frame is not defined
+		#Still gotta fix this
 
 class settings:
 	def __init__(self, master):
@@ -68,7 +71,7 @@ class settings:
 
 class binds:
 	def __init__(self, master):
-		root.bind('<F2>', lambda e: newGame(diff.get(), master, buttonFrame))
+		root.bind('<F2>', lambda e: newGame(diff.get(), master, buttonFrame, framePre))
 
 
 root = Tk()

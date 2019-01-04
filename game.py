@@ -11,6 +11,11 @@ def newGame(diff, window, frame):
 	global difficulty
 	global gameStarted
 	difficulty=diff
+	sunken.clear()
+	zeroTagged.clear()
+	bomb.clear()
+	flagged.clear()
+	buttonsDict.clear()
 	bombs = int(config.get("Difficulty{}".format(str(difficulty)), "bombs"))
 	difficultySettings(window, frame, difficulty, True)
 	for i in range(0, bombs):
@@ -53,9 +58,7 @@ def reveal(row, column, difficulty):
 		buttonsDict[(row, column)].config(image=bombImage, background="red")
 		buttonsDict[(row, column)].image = bombImage
 	else:
-		sunken.append(buttonsDict[(row, column)])
 		countBombs(row, column, difficulty)
-	print(len(sunken))
 	if len(sunken) == int(config.get("Difficulty{}".format(difficulty),"rows")) * int(config.get("Difficulty{}".format(difficulty),"columns")) - int(config.get("Difficulty{}".format(difficulty),"bombs")):
 		epicWinTime()
 
@@ -81,9 +84,11 @@ def countBombs(row, column, difficulty):
 				skip=True			
 			if buttonsDict[(differenceRow, differenceColumn)] in bomb and skip==False:
 				closeBombs+=1
-			if closeBombs>0:
+	if closeBombs > 0 and buttonsDict[(row, column)] not in sunken:
 				buttonsDict[(row, column)].config(text=closeBombs)
+				sunken.append(buttonsDict[(row, column)])
 	if closeBombs == 0:
+		sunken.append(buttonsDict[(row, column)])
 		for zeroRow in range(0,3):
 			for zeroColumn in range(0,3):
 				skip=False
@@ -101,11 +106,10 @@ def countBombs(row, column, difficulty):
 				if differenceColumn == int(config.get("Difficulty{}".format(str(difficulty)), "columns")):
 					differenceColumn-=1
 					skip=True
-				if buttonsDict[(differenceRow,differenceColumn)] not in zeroTagged and skip == False:
+				if buttonsDict[(differenceRow,differenceColumn)] not in zeroTagged and buttonsDict[(differenceRow,differenceColumn)] not in sunken and skip == False:
 					zeroTagged.append(buttonsDict[(differenceRow,differenceColumn)])
 					buttonsDict[(differenceRow,differenceColumn)].config(relief=SUNKEN, bg="white", state=DISABLED)
 					countBombs(differenceRow,differenceColumn,difficulty)
-					sunken.append(buttonsDict[(differenceRow,differenceColumn)])
 
 
 def flag(row, column, isGameStarted, difficulty):
@@ -134,6 +138,10 @@ def gameOver(row, column):
 
 
 def epicWinTime():
+	for row in range (0, int(config.get("Difficulty{}".format(str(difficulty)), "rows"))):
+		for column in range (0, int(config.get("Difficulty{}".format(str(difficulty)),"columns"))):
+			buttonsDict[(row, column)].config(state=DISABLED)
+			buttonsDict[(row, column)].bind('<Button-3>',"")
 	messagebox.showinfo("U gae", "You won! #EpicWinTime")
 	
 

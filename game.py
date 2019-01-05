@@ -147,9 +147,20 @@ def epicWinTime(frame, framePre, window, difficulty):
 	messagebox.showinfo("U gae", "You won! #EpicWinTime")
 	newStartButton(frame, framePre, window, difficulty)
 
+def destroyStartButton():
+	global startButton
+	try:
+		startButton.destroy()
+	except:
+		pass
 
 def newStartButton(frame, framePre, window, difficulty):
 	global startButton
+	try:
+		startButton.destroy()
+	except:
+		pass
 	startButton = Button(framePre,text="Start New Game",command=lambda:[newGame(difficulty, window, frame, framePre), startButton.destroy()])
 	startButton.place(relx=0.5, rely=0.5, anchor=CENTER)
+	return startButton
 	

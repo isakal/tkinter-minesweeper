@@ -38,9 +38,11 @@ def difficultySettings(window, frame, diff, framePre, isGameStarted):
 	import game
 	global resx
 	global resy
-
-	if gameStarted==False:
+	if gameStarted == False:
 		game.newStartButton(frame, framePre, window, difficulty)
+	else:
+		game.destroyStartButton()
+
 	if difficulty==4:
 		pass
 

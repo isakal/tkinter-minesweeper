@@ -19,9 +19,7 @@ class GUI:
 		buttonFrame.pack(fill='both', expand=True)
 		difficultyDefault(master, buttonFrame)
 
-		startButton = Button(framePre,text="Start New Game",command=lambda:[newGame(diff.get(),master,buttonFrame,framePre), startButton.destroy()])
-		startButton.place(relx=0.5, rely=0.5, anchor=CENTER)
-		#TODO: Fix this bitchass button
+		startButton = newStartButton(buttonFrame, framePre, master, 1)
 
 		self.menu = Menu(master, tearoff=0)
 		master.config(menu=self.menu)
@@ -31,14 +29,14 @@ class GUI:
 		self.submenu3 = Menu(self.menu, tearoff=0)
 
 		self.menu.add_cascade(label="Game", menu=self.submenu1)
-		self.submenu1.add_command(label="New Game    F2", command=lambda: [startButton.destroy(), newGame(diff.get(), master, buttonFrame, framePre)])
+		self.submenu1.add_command(label="New Game    F2", command=lambda: [newGame(diff.get(), master, buttonFrame, framePre)])
 		self.submenu1.add_separator()
 		self.submenu1.add_radiobutton(label="Beginner", value=1, variable=diff,
-									  command=lambda: [startButton.destroy(), createFrame(), difficultySettings(master, buttonFrame, diff.get(), framePre, False)])
+									  command=lambda: [createFrame(), difficultySettings(master, buttonFrame, diff.get(), framePre, False)])
 		self.submenu1.add_radiobutton(label="Intermediate", value=2, variable=diff,
-									  command=lambda: [startButton.destroy(), createFrame(), difficultySettings(master, buttonFrame, diff.get(), framePre, False)])
+									  command=lambda: [createFrame(), difficultySettings(master, buttonFrame, diff.get(), framePre, False)])
 		self.submenu1.add_radiobutton(label="Expert", value=3, variable=diff,
-									  command=lambda: [startButton.destroy(), createFrame(), difficultySettings(master, buttonFrame, diff.get(), framePre, False)])
+									  command=lambda: [createFrame(), difficultySettings(master, buttonFrame, diff.get(), framePre, False)])
 		self.submenu1.add_separator()
 		self.submenu1.add_command(label="Quit", command=lambda: QuitPrompt(master))
 
@@ -71,7 +69,7 @@ class settings:
 
 class binds:
 	def __init__(self, master):
-		root.bind('<F2>', lambda e:[startButton.destroy(), newGame(diff.get(), master, buttonFrame, framePre)])
+		root.bind('<F2>', lambda e:[newGame(diff.get(), master, buttonFrame, framePre)])
 
 
 root = Tk()

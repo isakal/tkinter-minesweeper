@@ -17,10 +17,10 @@ bombs=10
 rows=10
 columns=15
 maxFlags=17
-bombs=17
+bombs=25
 
 [Difficulty3]
 rows=15
 columns=20
 maxFlags=27
-bombs=27
+bombs=40

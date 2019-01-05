@@ -16,8 +16,10 @@ def newGame(diff, window, frame, framePre):
 	bomb.clear()
 	flagged.clear()
 	buttonsDict.clear()
+	if difficulty==4:
+		return 0
 	bombs = int(config.get("Difficulty{}".format(str(difficulty)), "bombs"))
-	difficultySettings(window, frame, difficulty, True)
+	difficultySettings(window, frame, difficulty, framePre, True)
 	for i in range(0, bombs):
 		randomRow = randint(0, int(config.get("Difficulty{}".format(str(difficulty)), "rows")) - 1)
 		randomColumn = randint(0, int(config.get("Difficulty{}".format(str(difficulty)), "columns")) - 1)
@@ -27,7 +29,6 @@ def newGame(diff, window, frame, framePre):
 		bomb.append(buttonsDict[(randomRow, randomColumn)])
 	giveButtonsFunction(frame, int(config.get("Difficulty{}".format(str(difficulty)), "rows")),
 						int(config.get("Difficulty{}".format(str(difficulty)), "columns")), framePre, window)
-	gameStarted = True
 
 
 def crateButtonGrid(frame, rows, columns, isGameStarted, difficulty):
@@ -53,14 +54,14 @@ def giveButtonsFunction(frame, rows, columns, framePre, window):
 def reveal(row, column, difficulty, frame, framePre, window):
 	buttonsDict[(row, column)].config(relief=SUNKEN, bg="white", state=DISABLED)
 	if buttonsDict[(row, column)] in bomb:
-		gameOver(row, column, frame, framePre, window)
+		gameOver(row, column, frame, framePre, window, difficulty)
 		bombImage = PhotoImage(file="bomb.gif")
 		buttonsDict[(row, column)].config(image=bombImage, background="red")
 		buttonsDict[(row, column)].image = bombImage
 	else:
 		countBombs(row, column, difficulty)
 	if len(sunken) == int(config.get("Difficulty{}".format(difficulty),"rows")) * int(config.get("Difficulty{}".format(difficulty),"columns")) - int(config.get("Difficulty{}".format(difficulty),"bombs")):
-		epicWinTime(frame, framePre, window)
+		epicWinTime(frame, framePre, window, difficulty)
 
 
 def countBombs(row, column, difficulty):
@@ -126,7 +127,7 @@ def flag(row, column, isGameStarted, difficulty):
 			flagged.remove(buttonsDict[(row, column)])
 
 
-def gameOver(row, column, frame, framePre, window):
+def gameOver(row, column, frame, framePre, window, difficulty):
 	bombImage = PhotoImage(file="bomb.gif")
 	for button in bomb:
 		button.config(image=bombImage, bg="white", relief=SUNKEN)
@@ -135,19 +136,20 @@ def gameOver(row, column, frame, framePre, window):
 		for column in range (0, int(config.get("Difficulty{}".format(str(difficulty)),"columns"))):
 			buttonsDict[(row, column)].config(state=DISABLED)
 			buttonsDict[(row, column)].bind('<Button-3>',"")
-	newStartButton(frame, framePre, window)
+	newStartButton(frame, framePre, window, difficulty)
 
 
-def epicWinTime(frame, framePre, window):
+def epicWinTime(frame, framePre, window, difficulty):
 	for row in range (0, int(config.get("Difficulty{}".format(str(difficulty)), "rows"))):
 		for column in range (0, int(config.get("Difficulty{}".format(str(difficulty)),"columns"))):
 			buttonsDict[(row, column)].config(state=DISABLED)
 			buttonsDict[(row, column)].bind('<Button-3>',"")
 	messagebox.showinfo("U gae", "You won! #EpicWinTime")
-	newStartButton(frame, framePre, window)
+	newStartButton(frame, framePre, window, difficulty)
 
 
-def newStartButton(frame, framePre, window):
+def newStartButton(frame, framePre, window, difficulty):
+	global startButton
 	startButton = Button(framePre,text="Start New Game",command=lambda:[newGame(difficulty, window, frame, framePre), startButton.destroy()])
 	startButton.place(relx=0.5, rely=0.5, anchor=CENTER)
 	

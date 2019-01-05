@@ -30,7 +30,7 @@ def difficultyDefault(window, frame):
 	game.crateButtonGrid(frame, rows, columns, False, 1)
 
 
-def difficultySettings(window, frame, diff, isGameStarted):
+def difficultySettings(window, frame, diff, framePre, isGameStarted):
 	global difficulty
 	difficulty=diff
 	global gameStarted
@@ -38,6 +38,11 @@ def difficultySettings(window, frame, diff, isGameStarted):
 	import game
 	global resx
 	global resy
+
+	if gameStarted==False:
+		game.newStartButton(frame, framePre, window, difficulty)
+	if difficulty==4:
+		pass
 
 	rows = int(config.get("Difficulty{}".format(str(difficulty)), "rows"))
 	columns = int(config.get("Difficulty{}".format(str(difficulty)), "columns"))
@@ -61,7 +66,8 @@ def AboutInChrome():
 	webbrowser.open('www.freeminesweeper.org/help/mineabout.html')
 
 
-def Credits(window, frame):
+def Credits(window, frame, button):
+	button.destroy()
 	creditsLabel1 = Label(frame, background="grey80",
 						  text="Minesweeper {}".format(str(config.get("Buttons", "version"))))
 	creditsLabel1.place(x=0, y=0)

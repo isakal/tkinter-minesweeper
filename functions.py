@@ -42,6 +42,7 @@ def difficultySettings(window, frame, diff, framePre, isGameStarted):
 		game.newStartButton(frame, framePre, window, difficulty)
 	else:
 		game.destroyStartButton()
+	flagButton.config(text="--")
 
 	if difficulty==4:
 		pass
@@ -86,6 +87,34 @@ def Credits(window, frame, button):
 	creditsButton1 = Button(frame, background="grey80", text="GitHub", command=SpinGithub, relief=FLAT)
 	creditsButton1.place(x=160, y=78)
 
+def destroyStartButton():
+	global startButton
+	try:
+		startButton.destroy()
+	except:
+		pass
+
+def newStartButton(frame, framePre, window, difficulty):
+	import game
+	global startButton
+	try:
+		startButton.destroy()
+	except:
+		pass
+	startButton = Button(framePre,text="Start New Game",command=lambda:[game.newGame(difficulty, window, frame, framePre), startButton.destroy()])
+	startButton.place(relx=0.5, rely=0.5, anchor=CENTER)
+	return startButton
+
+def newFlagButton(framePre):
+	global flagButton
+	flagButton = Button(framePre, text="--", state=DISABLED, relief=SUNKEN)
+	flagButton.place(width=25, height=25, relx=0.05, rely=0.5, anchor=W)
+	return flagButton
+
+def updateFlagButton():
+	if gameStarted==True:
+		remaining=int(config.get("Difficulty{}".format(difficulty), "maxFlags")) - len(flagged)
+		flagButton.config(text=remaining)
 
 def SakiGithub():
 	webbrowser.open("https://github.com/isakal")

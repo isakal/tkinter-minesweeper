@@ -20,6 +20,7 @@ class GUI:
 		difficultyDefault(master, buttonFrame)
 
 		startButton = newStartButton(buttonFrame, framePre, master, 1)
+		flagButton = newFlagButton(framePre)
 
 		self.menu = Menu(master, tearoff=0)
 		master.config(menu=self.menu)

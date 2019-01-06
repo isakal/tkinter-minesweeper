@@ -20,6 +20,7 @@ def newGame(diff, window, frame, framePre):
 		return 0
 	bombs = int(config.get("Difficulty{}".format(str(difficulty)), "bombs"))
 	difficultySettings(window, frame, difficulty, framePre, True)
+	updateFlagButton()
 	for i in range(0, bombs):
 		randomRow = randint(0, int(config.get("Difficulty{}".format(str(difficulty)), "rows")) - 1)
 		randomColumn = randint(0, int(config.get("Difficulty{}".format(str(difficulty)), "columns")) - 1)
@@ -125,6 +126,7 @@ def flag(row, column, isGameStarted, difficulty):
 		else:
 			buttonsDict[(row, column)].config(image="", state=NORMAL)
 			flagged.remove(buttonsDict[(row, column)])
+	updateFlagButton()
 
 
 def gameOver(row, column, frame, framePre, window, difficulty):
@@ -146,21 +148,3 @@ def epicWinTime(frame, framePre, window, difficulty):
 			buttonsDict[(row, column)].bind('<Button-3>',"")
 	messagebox.showinfo("U gae", "You won! #EpicWinTime")
 	newStartButton(frame, framePre, window, difficulty)
-
-def destroyStartButton():
-	global startButton
-	try:
-		startButton.destroy()
-	except:
-		pass
-
-def newStartButton(frame, framePre, window, difficulty):
-	global startButton
-	try:
-		startButton.destroy()
-	except:
-		pass
-	startButton = Button(framePre,text="Start New Game",command=lambda:[newGame(difficulty, window, frame, framePre), startButton.destroy()])
-	startButton.place(relx=0.5, rely=0.5, anchor=CENTER)
-	return startButton
-	

@@ -8,6 +8,7 @@ config.read_file(open(r"config.txt"))
 buttonSize = int(config.get("Buttons", "buttonSize"))
 
 def newGame(diff, window, frame, framePre):
+	global firstClick
 	global difficulty
 	global gameStarted
 	difficulty=diff
@@ -16,18 +17,12 @@ def newGame(diff, window, frame, framePre):
 	bomb.clear()
 	flagged.clear()
 	buttonsDict.clear()
+	firstClick=True
 	if difficulty==4:
 		return 0
-	bombs = int(config.get("Difficulty{}".format(str(difficulty)), "bombs"))
 	difficultySettings(window, frame, difficulty, framePre, True)
 	updateFlagButton()
-	for i in range(0, bombs):
-		randomRow = randint(0, int(config.get("Difficulty{}".format(str(difficulty)), "rows")) - 1)
-		randomColumn = randint(0, int(config.get("Difficulty{}".format(str(difficulty)), "columns")) - 1)
-		while buttonsDict[(randomRow, randomColumn)] in bomb:
-			randomRow = randint(0, int(config.get("Difficulty{}".format(str(difficulty)), "rows")) - 1)
-			randomColumn = randint(0, int(config.get("Difficulty{}".format(str(difficulty)), "columns")) - 1)
-		bomb.append(buttonsDict[(randomRow, randomColumn)])
+	generateBombs()
 	giveButtonsFunction(frame, int(config.get("Difficulty{}".format(str(difficulty)), "rows")),
 						int(config.get("Difficulty{}".format(str(difficulty)), "columns")), framePre, window)
 
@@ -51,18 +46,42 @@ def giveButtonsFunction(frame, rows, columns, framePre, window):
 			buttonsDict[(row, column)].config(command=lambda row=row, column=column: reveal(row, column, difficulty, frame, framePre, window),
 											  state=NORMAL)
 
+def generateBombs():
+	global bombs
+	bombs = int(config.get("Difficulty{}".format(str(difficulty)), "bombs"))
+	for i in range(0, bombs):
+		randomRow = randint(0, int(config.get("Difficulty{}".format(str(difficulty)), "rows")) - 1)
+		randomColumn = randint(0, int(config.get("Difficulty{}".format(str(difficulty)), "columns")) - 1)
+		while buttonsDict[(randomRow, randomColumn)] in bomb:
+			randomRow = randint(0, int(config.get("Difficulty{}".format(str(difficulty)), "rows")) - 1)
+			randomColumn = randint(0, int(config.get("Difficulty{}".format(str(difficulty)), "columns")) - 1)
+		bomb.append(buttonsDict[(randomRow, randomColumn)])
+
+
 
 def reveal(row, column, difficulty, frame, framePre, window):
+	global firstClick
+	print(firstClick)
 	buttonsDict[(row, column)].config(relief=SUNKEN, bg="white", state=DISABLED)
 	if buttonsDict[(row, column)] in bomb:
-		gameOver(row, column, frame, framePre, window, difficulty)
-		bombImage = PhotoImage(file="bomb.gif")
-		buttonsDict[(row, column)].config(image=bombImage, background="red")
-		buttonsDict[(row, column)].image = bombImage
+		if firstClick==False:
+			gameOver(row, column, frame, framePre, window, difficulty)
+			bombImage = PhotoImage(file="bomb.gif")
+			buttonsDict[(row, column)].config(image=bombImage, background="red")
+			buttonsDict[(row, column)].image = bombImage
+		else:
+			bomb.remove(buttonsDict[(row, column)])
+			randomRow = randint(0, int(config.get("Difficulty{}".format(str(difficulty)), "rows")) - 1)
+			randomColumn = randint(0, int(config.get("Difficulty{}".format(str(difficulty)), "columns")) - 1)
+			while buttonsDict[(randomRow, randomColumn)] in bomb or buttonsDict[(randomRow, randomColumn)]==buttonsDict[(row, column)]:
+				randomRow = randint(0, int(config.get("Difficulty{}".format(str(difficulty)), "rows")) - 1)
+				randomColumn = randint(0, int(config.get("Difficulty{}".format(str(difficulty)), "columns")) - 1)
+			countBombs(row, column, difficulty)
 	else:
 		countBombs(row, column, difficulty)
 	if len(sunken) == int(config.get("Difficulty{}".format(difficulty),"rows")) * int(config.get("Difficulty{}".format(difficulty),"columns")) - int(config.get("Difficulty{}".format(difficulty),"bombs")):
 		epicWinTime(frame, framePre, window, difficulty)
+	firstClick=False
 
 
 def countBombs(row, column, difficulty):

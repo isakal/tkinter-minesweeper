@@ -16,11 +16,11 @@ bombs=10
 [Difficulty2]
 rows=10
 columns=15
-maxFlags=17
+maxFlags=25
 bombs=25
 
 [Difficulty3]
 rows=15
 columns=20
-maxFlags=27
+maxFlags=40
 bombs=40

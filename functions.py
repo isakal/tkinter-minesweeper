@@ -15,6 +15,7 @@ bomb = []
 zeroTagged = []
 gameStarted = False
 difficulty=1
+firstClick=True
 
 
 def difficultyDefault(window, frame):

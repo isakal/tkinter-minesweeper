@@ -70,7 +70,7 @@ class settings:
 
 class binds:
 	def __init__(self, master):
-		root.bind('<F2>', lambda e:[newGame(diff.get(), master, buttonFrame, framePre)])
+		master.bind('<F2>', lambda e:[newGame(diff.get(), master, buttonFrame, framePre)])
 
 
 root = Tk()

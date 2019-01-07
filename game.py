@@ -61,7 +61,6 @@ def generateBombs():
 
 def reveal(row, column, difficulty, frame, framePre, window):
 	global firstClick
-	print(firstClick)
 	buttonsDict[(row, column)].config(relief=SUNKEN, bg="white", state=DISABLED)
 	if buttonsDict[(row, column)] in bomb:
 		if firstClick==False:

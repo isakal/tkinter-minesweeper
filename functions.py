@@ -3,6 +3,7 @@ from tkinter import messagebox
 import webbrowser
 from configparser import *
 from random import *
+import time
 
 config = ConfigParser()
 config.read_file(open(r"config.txt"))
@@ -16,7 +17,7 @@ zeroTagged = []
 gameStarted = False
 difficulty=1
 firstClick=True
-
+stopwatch = time.time()
 
 def difficultyDefault(window, frame):
 	import game
@@ -123,3 +124,15 @@ def SakiGithub():
 
 def SpinGithub():
 	webbrowser.open("https://github.com/Spinzed")
+
+def startTimer():
+	global stopwatch
+	stopwatch = time.time()
+	
+def stopTimer():
+	global stopwatch
+	stopwatch = time.time() - stopwatch
+
+def printTimer():
+	global stopwatch
+	print("Time taken: {0:.3} seconds".format(stopwatch), flush=True)

@@ -25,6 +25,7 @@ def newGame(diff, window, frame, framePre):
 	generateBombs()
 	giveButtonsFunction(frame, int(config.get("Difficulty{}".format(str(difficulty)), "rows")),
 						int(config.get("Difficulty{}".format(str(difficulty)), "columns")), framePre, window)
+	startTimer()
 
 
 def crateButtonGrid(frame, rows, columns, isGameStarted, difficulty):
@@ -156,6 +157,8 @@ def gameOver(row, column, frame, framePre, window, difficulty):
 		for column in range (0, int(config.get("Difficulty{}".format(str(difficulty)),"columns"))):
 			buttonsDict[(row, column)].config(state=DISABLED)
 			buttonsDict[(row, column)].bind('<Button-3>',"")
+	stopTimer()
+	printTimer()
 	newStartButton(frame, framePre, window, difficulty)
 
 
@@ -165,4 +168,6 @@ def epicWinTime(frame, framePre, window, difficulty):
 			buttonsDict[(row, column)].config(state=DISABLED)
 			buttonsDict[(row, column)].bind('<Button-3>',"")
 	messagebox.showinfo("U gae", "You won! #EpicWinTime")
+	stopTimer()
+	printTimer()
 	newStartButton(frame, framePre, window, difficulty)

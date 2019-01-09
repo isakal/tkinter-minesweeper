@@ -113,10 +113,12 @@ def newFlagButton(framePre):
 	flagButton.place(width=25, height=25, relx=0.05, rely=0.5, anchor=W)
 	return flagButton
 
+
 def updateFlagButton():
 	if gameStarted==True:
 		remaining=int(config.get("Difficulty{}".format(difficulty), "maxFlags")) - len(flagged)
 		flagButton.config(text=remaining)
+
 
 def SakiGithub():
 	webbrowser.open("https://github.com/isakal")
@@ -125,13 +127,22 @@ def SakiGithub():
 def SpinGithub():
 	webbrowser.open("https://github.com/Spinzed")
 
+
 def startTimer():
 	global stopwatch
 	stopwatch = time.time()
 	
+
 def stopTimer():
 	global stopwatch
 	stopwatch = time.time() - stopwatch
+
+
+def getTimer():
+	global stopwatch
+	stopwatch = time.time() - stopwatch
+	return stopwatch
+
 
 def printTimer():
 	global stopwatch

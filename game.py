@@ -17,8 +17,8 @@ def newGame(diff, window, frame, framePre):
 	bomb.clear()
 	flagged.clear()
 	buttonsDict.clear()
-	firstClick=True
-	if difficulty==4:
+	firstClick = True
+	if difficulty == 4:
 		return 0
 	difficultySettings(window, frame, difficulty, framePre, True)
 	updateFlagButton()

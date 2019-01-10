@@ -45,9 +45,9 @@ class GUI:
 		self.submenu2.add_checkbutton(label="Tutorial coming soon")
 
 		self.menu.add_cascade(label="Help", menu=self.submenu3)
-		self.submenu3.add_command(label="Instructions", command=lambda: InstructionsInChrome())
+		self.submenu3.add_command(label="Instructions", command=lambda: instructionsInChrome())
 		self.submenu3.add_separator()
-		self.submenu3.add_command(label="About", command=lambda: AboutInChrome())
+		self.submenu3.add_command(label="About", command=lambda: aboutInChrome())
 		self.submenu3.add_separator()
 		self.submenu3.add_command(label="Credits", command=lambda: [diff.set(4), createFrame(), Credits(master, buttonFrame, startButton)])
 		

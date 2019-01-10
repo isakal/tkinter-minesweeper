@@ -158,7 +158,7 @@ def gameOver(row, column, frame, framePre, window, difficulty):
 			buttonsDict[(row, column)].config(state=DISABLED)
 			buttonsDict[(row, column)].bind('<Button-3>',"")
 	stopTimer()
-	printTimer()
+
 	newStartButton(frame, framePre, window, difficulty)
 
 
@@ -169,5 +169,5 @@ def epicWinTime(frame, framePre, window, difficulty):
 			buttonsDict[(row, column)].config(state=DISABLED)
 			buttonsDict[(row, column)].bind('<Button-3>',"")
 	messagebox.showinfo("U gae", "You won! #EpicWinTime\nThe time was: {0:.3}".format(getTimer()))
-	printTimer()
+
 	newStartButton(frame, framePre, window, difficulty)

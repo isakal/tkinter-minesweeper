@@ -144,6 +144,4 @@ def getTimer():
 	return stopwatch
 
 
-def printTimer():
-	global stopwatch
-	print("Time taken: {0:.3} seconds".format(stopwatch), flush=True)
+

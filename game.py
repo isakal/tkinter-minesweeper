@@ -106,8 +106,11 @@ def countBombs(row, column, difficulty):
 			if buttonsDict[(differenceRow, differenceColumn)] in bomb and skip==False:
 				closeBombs+=1
 	if closeBombs > 0 and buttonsDict[(row, column)] not in sunken:
-				buttonsDict[(row, column)].config(text=closeBombs)
-				sunken.append(buttonsDict[(row, column)])
+		if buttonsDict[(differenceRow,differenceColumn)] in flagged:
+			flagged.remove(buttonsDict[(differenceRow,differenceColumn)])
+			updateFlagButton()
+		buttonsDict[(row, column)].config(text=closeBombs, image="")
+		sunken.append(buttonsDict[(row, column)])
 	if closeBombs == 0:
 		sunken.append(buttonsDict[(row, column)])
 		for zeroRow in range(0,3):
@@ -128,8 +131,11 @@ def countBombs(row, column, difficulty):
 					differenceColumn-=1
 					skip=True
 				if buttonsDict[(differenceRow,differenceColumn)] not in zeroTagged and buttonsDict[(differenceRow,differenceColumn)] not in sunken and skip == False:
+					if buttonsDict[(differenceRow,differenceColumn)] in flagged:
+						flagged.remove(buttonsDict[(differenceRow,differenceColumn)])
+						updateFlagButton()
 					zeroTagged.append(buttonsDict[(differenceRow,differenceColumn)])
-					buttonsDict[(differenceRow,differenceColumn)].config(relief=SUNKEN, bg="white", state=DISABLED)
+					buttonsDict[(differenceRow,differenceColumn)].config(relief=SUNKEN, bg="white", state=DISABLED, image="")
 					countBombs(differenceRow,differenceColumn,difficulty)
 
 

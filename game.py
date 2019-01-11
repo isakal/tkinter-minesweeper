@@ -106,8 +106,8 @@ def countBombs(row, column, difficulty):
 			if buttonsDict[(differenceRow, differenceColumn)] in bomb and skip==False:
 				closeBombs+=1
 	if closeBombs > 0 and buttonsDict[(row, column)] not in sunken:
-		if buttonsDict[(differenceRow,differenceColumn)] in flagged:
-			flagged.remove(buttonsDict[(differenceRow,differenceColumn)])
+		if buttonsDict[(row, column)] in flagged:
+			flagged.remove(buttonsDict[(row, column)])
 			updateFlagButton()
 		buttonsDict[(row, column)].config(text=closeBombs, image="")
 		sunken.append(buttonsDict[(row, column)])

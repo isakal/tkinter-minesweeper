@@ -28,7 +28,7 @@ def difficultyDefault(window, frame):
 	columns = int(config.get("Default", "columns"))
 	resx = buttonSize * columns
 	resy = buttonSize * rows + buttonFramePadding + 20
-	window.geometry(f"{resx}x{resy}")
+	window.geometry("{}x{}".format(resx, resy))
 	game.crateButtonGrid(frame, rows, columns, False, 1)
 
 
@@ -53,7 +53,7 @@ def difficultySettings(window, frame, diff, framePre, isGameStarted):
 	columns = int(config.get("Difficulty{}".format(str(difficulty)), "columns"))
 	resx = buttonSize * columns
 	resy = buttonSize * rows + buttonFramePadding
-	window.geometry(f"{resx}x{resy}")
+	window.geometry("{}x{}".format(resx, resy))
 	game.crateButtonGrid(frame, rows, columns, isGameStarted, difficulty)
 
 
@@ -136,12 +136,16 @@ def startTimer():
 def stopTimer():
 	global stopwatch
 	stopwatch = time.time() - stopwatch
+	stopwatch = round(float(stopwatch), 2)
 
 
 def getTimer():
 	global stopwatch
 	stopwatch = time.time() - stopwatch
+	stopwatch = round(float(stopwatch), 2)
 	return stopwatch
 
 
-
+def printTimer():
+	global stopwatch
+	print("Time taken: {} seconds".format(round(float(stopwatch), 2)), flush=True)

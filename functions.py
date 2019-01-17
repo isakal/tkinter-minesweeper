@@ -136,14 +136,16 @@ def startTimer():
 def stopTimer():
 	global stopwatch
 	stopwatch = time.time() - stopwatch
+	stopwatch = round(float(stopwatch), 2)
 
 
 def getTimer():
 	global stopwatch
 	stopwatch = time.time() - stopwatch
+	stopwatch = round(float(stopwatch), 2)
 	return stopwatch
 
 
 def printTimer():
 	global stopwatch
-	print("Time taken: {0:.3} seconds".format(stopwatch), flush=True)
+	print("Time taken: {} seconds".format(round(float(stopwatch), 2)), flush=True)
